@@ -7,15 +7,31 @@
  * Summary:
  *    Create a binary search tree
  ************************************************************************/
-
+#include "bst.h"
 #ifndef BST_H
 #define BST_H
 
 namespace custom
 {
 
+class BST{
 
+  public:
+   BST();
+   BST(BST <T> rhs);
+   ~BST();
    
+   
+  private:
+   BNode <T> root; //does this need to be a pointer??
+   
+
+};
+   
+/*************************************************
+ *BST CONSTRUCTOR
+ *assigns default values to the objects
+ ************************************************/
 /**************************************************
  * BST ITERATOR :: DECREMENT PREFIX
  *     advance by one. 
