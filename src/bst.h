@@ -14,19 +14,52 @@
 namespace custom
 {
 
+<<<<<<< HEAD
 template <class T>
+=======
+templete <class T>
+>>>>>>> 10c5da73dabb93c625426617aad22a39ecd1aafa
 class BST{
 
+private:
+	int numElements;
+	BNode <T> *root; //does this need to be a pointer?? Yes, Tim. :)
+
+
   public:
-   BST();
-   BST(const BST <T> & rhs);
-   ~BST();
-   BST & operator= (const BST & rhs) throw (const char *);
-   
-   
-  private:
-   BNode <T> * root; 
-   
+
+	  class iterator; // Always remeber dear knights always forward declare thine classes!
+
+	  iterator find(T itemToFind);
+	  iterator begin();
+	  iterator end();
+
+	  BST()
+	  {
+		  root = nullptr;
+		  numElements = 0;
+	  }
+
+	  BST(BST <T> *rhs)
+	  {
+
+	  }
+
+
+	  BST operator=();
+
+	  int size{ return numElements; }
+	  bool empty() { return numElements == 0; }
+	  void clear();
+	  void insert(T item); // The Big Mac on the plate though this won't be too difficult equation wise if (item > left == true)  isRight = true;
+	  void erase(iterator it);
+	  void deleteNode(BNode <T> *nodeToDelete, bool isRight);
+	  void deleteBinaryTree(BNode <T> *deletor);
+	  void copyBinaryTree(BNode<T> *copySource, BNode <T> *copyDest);
+	  ~BST()
+	  {
+
+	  }
 
 };
    
