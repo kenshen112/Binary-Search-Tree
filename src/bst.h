@@ -42,9 +42,9 @@ namespace custom
       }
       
       
-      BST operator=();
+      BST operator = (BST <T> *rhs);
       
-      int size{ return numElements; }
+      int size()   { return numElements; }
       bool empty() { return numElements == 0; }
       void clear();
       void insert(T item); // The Big Mac on the plate though this won't be too difficult equation wise if (item > left == true)  isRight = true;
@@ -63,7 +63,8 @@ namespace custom
  *BST CONSTRUCTOR
  *assigns default values to the objects
  ************************************************/
-   BST()
+   template <class T>
+   BST <T> ()
    {
       root = nullptr;
    }
@@ -72,7 +73,8 @@ namespace custom
  *BST DESTRUCTOR
  *destroys each node using deleteBTree from bnode.h 
  ************************************************/
-   ~BST()
+   template <class T>
+   ~BST <T> ()
    {
       deleteBTree(root);
    }
@@ -82,7 +84,7 @@ namespace custom
  *copies data from one BST to another
  ************************************************/
    template <class T>
-      BST(const BST <T> & rhs)
+      BST <T> (const BST <T> & rhs)
    {
       if(rhs == nullptr)
       {
@@ -142,7 +144,7 @@ namespace custom
    }
    
    template <class T>
-      void BST<T>:erase(iterator it)
+      void BST<T>::erase(iterator it)
    {
       
       if (it.pRight == nullptr && it.pLeft == nullptr) // there aint no children up in here mmm hmmm das what i'm sayin.
