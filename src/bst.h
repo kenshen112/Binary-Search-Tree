@@ -101,11 +101,11 @@ template <class T>
 typename BST <T> :: iterator & BST <T> :: iterator :: operator -- ()
 {
    // do nothing if we have nothing
-   if (NULL == pNode)
+   if (pNode == nullptr) // rember always use nullptr instead of NULL
       return *this;
 
    // if there is a left node, take it
-   if (NULL != pNode->pLeft)
+   if (nullptr != pNode->pLeft)
    {
       // go left
       pNode = pNode->pLeft;
@@ -117,14 +117,14 @@ typename BST <T> :: iterator & BST <T> :: iterator :: operator -- ()
    }
 
    // there are no left children, the right are done
-   assert(NULL == pNode->pLeft);
-   BNode * pSave = pNode;
+   assert(nullptr == pNode->pLeft);
+   BNode<T> * pSave = pNode;
 
    // go up
    pNode = pNode->pParent;
 
    // if the parent is the NULL, we are done!
-   if (NULL == pNode)
+   if (nullptr == pNode)
       return *this;
 
    // if we are the right-child, got to the parent.
@@ -132,13 +132,62 @@ typename BST <T> :: iterator & BST <T> :: iterator :: operator -- ()
       return *this;
 
    // we are the left-child, go up as long as we are the left child!
-   while (NULL != pNode && pSave == pNode->pLeft)
+   while (nullptr != pNode && pSave == pNode->pLeft)
    {
       pSave = pNode;
       pNode = pNode->pParent;
    }
 
    return *this;
+}
+
+template <class T>
+void BST<T>:erase(iterator it)
+{
+
+	if (it.pRight == nullptr && it.pLeft == nullptr) // there aint no children up in here mmm hmmm das what i'm sayin.
+	{
+		if (it.pParent != nullptr && it.pParent.pRight == it)
+		{
+			it.pParent.pRight = nullptr;
+		}
+
+		else if (it.pParent != nullptr && it.pParent.pLeft == it)
+		{
+			it.pParent.pRight = nullptr;
+		}
+	}
+
+	if (it.pRight != nullptr && it.pLeft == nullptr)
+	{
+		it.pRight.pParent = it.pParent;
+
+		if (it.pParent != nullptr && it.pParent.pRight == it)
+		{
+			it.pParent.pRight = it.pRight;
+		}
+
+		if (it.pParent != nullptr && it.pParent.pLeft == it)
+		{
+			it.pParent.pLeft = it.pRight;
+		}
+	}
+
+	if (it.pRight == nullptr && it.pLeft != nullptr)
+	{
+		it.pLeft.pParent = it.pParent;
+
+		if (it.pParent != nullptr && it.pParent->pRight == it)
+		{
+			it.pParent->pRight = it.pLeft;
+		}
+
+		if (it.pParent != nullptr && it.pParent->pLeft == it)
+		{
+			it.pParent.pLeft = it.pLeft;
+		}
+	}
+
 }
 
 } // namespace custom
