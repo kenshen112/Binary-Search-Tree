@@ -19,7 +19,7 @@ class BST{
 
 private:
 	int numElements;
-	BNode <T> *root; //does this need to be a pointer?? Yes, Tim. :)
+	BNode <T> *root;
 
 
   public:
@@ -74,7 +74,7 @@ BST()
 ************************************************/
 ~BST()
 {
-   deleteBTree(root);
+  deleteBinaryTree(root);
 }
 
 /*************************************************
@@ -89,7 +89,9 @@ BST(const BST <T> & rhs)
       return nullptr;
    }
 
-   BST <T> *destination = new BST<T>(rhs->root)
+   BST <T> *destination = new BST<T>(rhs->root);
+
+   
 }
 /**************************************************
  * BST ITERATOR :: DECREMENT PREFIX
