@@ -14,17 +14,48 @@
 namespace custom
 {
 
+templete <class T>
 class BST{
 
+private:
+	int numElements;
+	BNode <T> *root; //does this need to be a pointer?? Yes, Tim. :)
+
+
   public:
-   BST();
-   BST(BST <T> rhs);
-   ~BST();
-   
-   
-  private:
-   BNode <T> root; //does this need to be a pointer??
-   
+
+	  class iterator; // Always remeber dear knights always forward declare thine classes!
+
+	  iterator find(T itemToFind);
+	  iterator begin();
+	  iterator end();
+
+	  BST()
+	  {
+		  root = nullptr;
+		  numElements = 0;
+	  }
+
+	  BST(BST <T> *rhs)
+	  {
+
+	  }
+
+
+	  BST operator=();
+
+	  int size{ return numElements; }
+	  bool empty() { return numElements == 0; }
+	  void clear();
+	  void insert(T item); // The Big Mac on the plate though this won't be too difficult equation wise if (item > left == true)  isRight = true;
+	  void erase(iterator it);
+	  void deleteNode(BNode <T> *nodeToDelete, bool isRight);
+	  void deleteBinaryTree(BNode <T> *deletor);
+	  void copyBinaryTree(BNode<T> *copySource, BNode <T> *copyDest);
+	  ~BST()
+	  {
+
+	  }
 
 };
    
