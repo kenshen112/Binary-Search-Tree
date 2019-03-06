@@ -7,23 +7,25 @@
  * Summary:
  *    Create a binary search tree
  ************************************************************************/
-#include "bst.h"
+#include "bnode.h"
 #ifndef BST_H
 #define BST_H
 
 namespace custom
 {
 
+template <class T>
 class BST{
 
   public:
    BST();
-   BST(BST <T> rhs);
+   BST(const BST <T> & rhs);
    ~BST();
+   BST & operator= (const BST & rhs) throw (const char *);
    
    
   private:
-   BNode <T> root; //does this need to be a pointer??
+   BNode <T> * root; 
    
 
 };
@@ -32,6 +34,34 @@ class BST{
  *BST CONSTRUCTOR
  *assigns default values to the objects
  ************************************************/
+BST()
+{
+   root = nullptr;
+}
+
+/*************************************************
+*BST DESTRUCTOR
+*destroys each node using deleteBTree from bnode.h 
+************************************************/
+~BST()
+{
+   deleteBTree(root);
+}
+
+/*************************************************
+ *BST COPY CONSTRUCTOR
+ *copies data from one BST to another
+************************************************/
+template <class T>
+BST(const BST <T> & rhs)
+{
+   if(rhs == nullptr)
+   {
+      return nullptr;
+   }
+
+   BST <T> *destination = new BST<T>(rhs->root)
+}
 /**************************************************
  * BST ITERATOR :: DECREMENT PREFIX
  *     advance by one. 
