@@ -30,10 +30,53 @@ namespace custom
       iterator begin();
       iterator end();
       
-      BST();
-      ~BST();
-      BST(const BST <T> *rhs);
-      BST operator = (const BST <T> *rhs);
+      BST()
+      {
+         root = nullptr;
+         numElements = 0;
+      }
+      ~BST()
+      {
+         deleteBinaryTree(root);
+      }
+      BST(const BST <T> *rhs)
+       {
+          
+          BST <T> *destination = new BST<T> *;
+          
+          if(rhs == nullptr)
+          {
+             destination->root = nullptr;
+          }
+          
+          numElements = rhs.numElements;
+          
+          for(BST <T> :: iterator it = rhs.begin(); it != rhs.end(); ++it)
+          {
+             destination.insert(*it);
+          }
+          
+       }
+
+      BST operator = (const BST <T> *rhs)
+      {
+         
+         if(rhs == nullptr)
+         {
+            return nullptr;
+         }
+         
+         BST <T> * destination = new BST <T>(rhs->root);
+         numElements = rhs.numElements;
+         
+         for(BST <T> :: iterator it = rhs.begin(); it != rhs.end(); ++it)
+         {
+            destination.insert(*it);
+         }
+         
+         return *this;
+           
+      }
       
       int size()   { return numElements; }
       bool empty() { return numElements == 0; }
@@ -45,75 +88,7 @@ namespace custom
       void copyBinaryTree(BNode<T> *copySource, BNode <T> *copyDest);
       
    };
-   
-/*************************************************
- *BST CONSTRUCTOR
- *assigns default values to the objects
- ************************************************/
-  
 
-template <class T>
-BST<T>::BST() // either make this inline as in inside the class parenthesis or it should belong to the calss
-  {
-	  root = nullptr;   
-	  numElements = 0;
-  }
-
-/*************************************************
-*BST DESTRUCTOR
-*destroys each node using deleteBTree from bnode.h 
-************************************************/
-template <class T>  
-BST<T>::~BST()
-{
-   deleteBinaryTree(root);
-}
-
-/*************************************************
- *BST COPY CONSTRUCTOR
- *copies data from one BST to another
- ************************************************/
-template <class T>
-BST<T>::BST(const BST <T> & rhs)
-{
-   if(rhs == nullptr)
-   {
-      return nullptr;
-   }
-   
-   
-   BST <T> *destination = new BST<T>(rhs->root);
-   numElements = rhs.numElements;
-
-   for(BST <T> :: iterator it = rhs.begin(); it != rhs.end(); ++it)
-   {
-      destination.insert(*it);
-   }
-
-   return destination;
-}
-/*************************************************
- *BST OPERATOR =
- *assignment operator overloader
- ************************************************/
-template <class T>
-   BST<T>::BST operator=(const BST <T> & rhs)
-   {
-      if(rhs == nullptr)
-      {
-         return nullptr;
-      }
-
-      BST <T> * destination = new BST <T>(rhs->root);
-      numElements = rhs.numElements;
-
-      for(BST <T> :: iterator it = rhs.begin(); it != rhs.end(); ++it)
-      {
-         destination.insert(*it);
-      }
-      
-      return *this;
-   }
 /**************************************************
  * BST ITERATOR :: DECREMENT PREFIX
  *     advance by one. 
