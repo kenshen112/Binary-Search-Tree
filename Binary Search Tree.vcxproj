@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\bnode.h" />
+    <ClInclude Include="src\bst.h" />
     <ClInclude Include="src\huffman.h" />
     <ClInclude Include="src\node.h" />
     <ClInclude Include="src\pair.h" />
