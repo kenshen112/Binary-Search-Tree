@@ -50,17 +50,21 @@ namespace custom
  *BST CONSTRUCTOR
  *assigns default values to the objects
  ************************************************/
-   BST::BST() // either make this inline as in inside the class parenthesis or it should belong to the calss
-{
-   root = nullptr;
-   numElements = 0;
-}
+  
+
+template <class T>
+BST<T>::BST() // either make this inline as in inside the class parenthesis or it should belong to the calss
+  {
+	  root = nullptr;   
+	  numElements = 0;
+  }
 
 /*************************************************
 *BST DESTRUCTOR
 *destroys each node using deleteBTree from bnode.h 
 ************************************************/
-   BST::~BST()
+template <class T>  
+BST<T>::~BST()
 {
    deleteBinaryTree(root);
 }
@@ -70,7 +74,7 @@ namespace custom
  *copies data from one BST to another
  ************************************************/
 template <class T>
-   BST::BST <T> (const BST <T> & rhs)
+BST<T>::BST(const BST <T> & rhs)
 {
    if(rhs == nullptr)
    {
