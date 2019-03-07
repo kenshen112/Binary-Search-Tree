@@ -30,19 +30,10 @@ private:
 	  iterator begin();
 	  iterator end();
 
-	  BST()
-	  {
-		  root = nullptr;
-		  numElements = 0;
-	  }
-
-	  BST(BST <T> *rhs)
-	  {
-
-	  }
-
-
-	  BST operator=();
+          BST();
+          ~BST();
+          BST(const BST <T> & rhs);
+          BST operator= (const BST <T> & rhs);
 
 	  int size{ return numElements; }
 	  bool empty() { return numElements == 0; }
@@ -66,6 +57,7 @@ private:
 BST()
 {
    root = nullptr;
+   numElements = 0;
 }
 
 /*************************************************
@@ -90,8 +82,18 @@ BST(const BST <T> & rhs)
    }
 
    BST <T> *destination = new BST<T>(rhs->root);
+   numElements = rhs.numElements;
 
    
+}
+/*************************************************
+ *BST OPERATOR =
+ *assignment operator overloader
+ ************************************************/
+template <class T>
+BST operator=(const BST <T> & rhs)
+{
+   return *this;
 }
 /**************************************************
  * BST ITERATOR :: DECREMENT PREFIX
