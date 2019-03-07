@@ -99,6 +99,19 @@ BST<T>::BST(const BST <T> & rhs)
 template <class T>
    BST<T>::BST operator=(const BST <T> & rhs)
    {
+      if(rhs == nullptr)
+      {
+         return nullptr;
+      }
+
+      BST <T> * destination = new BST <T>(rhs->root);
+      numElements = rhs.numElements;
+
+      for(BST <T> :: iterator it = rhs.begin(); it != rhs.end(); ++it)
+      {
+         destination.insert(*it);
+      }
+      
       return *this;
    }
 /**************************************************
