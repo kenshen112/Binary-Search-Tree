@@ -80,8 +80,13 @@ template <class T>
    
    BST <T> *destination = new BST<T>(rhs->root);
    numElements = rhs.numElements;
-   
-   
+
+   for(BST <T> :: iterator it = rhs.begin(); it != rhs.end(); ++it)
+   {
+      destination.insert(*it);
+   }
+
+   return destination;
 }
 /*************************************************
  *BST OPERATOR =
