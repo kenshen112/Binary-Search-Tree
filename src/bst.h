@@ -97,7 +97,7 @@ BST<T>::BST(const BST <T> & rhs)
  *assignment operator overloader
  ************************************************/
 template <class T>
-   BST::BST operator=(const BST <T> & rhs)
+   BST<T>::BST operator=(const BST <T> & rhs)
    {
       return *this;
    }
