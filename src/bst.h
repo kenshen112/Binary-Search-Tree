@@ -50,7 +50,7 @@ namespace custom
  *BST CONSTRUCTOR
  *assigns default values to the objects
  ************************************************/
-BST() // either make this inline as in inside the class parenthesis or it should belong to the calss
+   BST::BST() // either make this inline as in inside the class parenthesis or it should belong to the calss
 {
    root = nullptr;
    numElements = 0;
@@ -60,7 +60,7 @@ BST() // either make this inline as in inside the class parenthesis or it should
 *BST DESTRUCTOR
 *destroys each node using deleteBTree from bnode.h 
 ************************************************/
-~BST()
+   BST::~BST()
 {
    deleteBinaryTree(root);
 }
@@ -70,7 +70,7 @@ BST() // either make this inline as in inside the class parenthesis or it should
  *copies data from one BST to another
  ************************************************/
 template <class T>
-   BST <T> (const BST <T> & rhs)
+   BST::BST <T> (const BST <T> & rhs)
 {
    if(rhs == nullptr)
    {
@@ -88,7 +88,7 @@ template <class T>
  *assignment operator overloader
  ************************************************/
 template <class T>
-   BST operator=(const BST <T> & rhs)
+   BST::BST operator=(const BST <T> & rhs)
    {
       return *this;
    }
