@@ -50,7 +50,7 @@ namespace custom
  *BST CONSTRUCTOR
  *assigns default values to the objects
  ************************************************/
-BST()
+BST() // either make this inline as in inside the class parenthesis or it should belong to the calss
 {
    root = nullptr;
    numElements = 0;
