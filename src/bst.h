@@ -30,19 +30,10 @@ namespace custom
       iterator begin();
       iterator end();
       
-      BST()
-      {
-         root = nullptr;
-         numElements = 0;
-      }
-      
-      BST(BST <T> *rhs)
-      {
-         
-      }
-      
-      
-      BST operator = (BST <T> *rhs);
+      BST();
+      ~BST();
+      BST(const BST <T> *rhs);
+      BST operator = (const BST <T> *rhs);
       
       int size()   { return numElements; }
       bool empty() { return numElements == 0; }
@@ -52,10 +43,6 @@ namespace custom
       void deleteNode(BNode <T> *nodeToDelete, bool isRight);
       void deleteBinaryTree(BNode <T> *deletor);
       void copyBinaryTree(BNode<T> *copySource, BNode <T> *copyDest);
-      ~BST()
-      {
-         
-      }
       
    };
    
@@ -63,35 +50,47 @@ namespace custom
  *BST CONSTRUCTOR
  *assigns default values to the objects
  ************************************************/
-   template <class T>
-   BST <T> ()
-   {
-      root = nullptr;
-   }
-   
+BST()
+{
+   root = nullptr;
+   numElements = 0;
+}
+
 /*************************************************
- *BST DESTRUCTOR
- *destroys each node using deleteBTree from bnode.h 
- ************************************************/
-   template <class T>
-   ~BST <T> ()
-   {
-      deleteBTree(root);
-   }
+*BST DESTRUCTOR
+*destroys each node using deleteBTree from bnode.h 
+************************************************/
+~BST()
+{
+   deleteBinaryTree(root);
+}
 
 /*************************************************
  *BST COPY CONSTRUCTOR
  *copies data from one BST to another
  ************************************************/
-   template <class T>
-      BST <T> (const BST <T> & rhs)
+template <class T>
+   BST <T> (const BST <T> & rhs)
+{
+   if(rhs == nullptr)
    {
-      if(rhs == nullptr)
-      {
-         return nullptr;
-      }
-      
-      BST <T> *destination = new BST<T>(rhs->root);
+      return nullptr;
+   }
+   
+   
+   BST <T> *destination = new BST<T>(rhs->root);
+   numElements = rhs.numElements;
+   
+   
+}
+/*************************************************
+ *BST OPERATOR =
+ *assignment operator overloader
+ ************************************************/
+template <class T>
+   BST operator=(const BST <T> & rhs)
+   {
+      return *this;
    }
 /**************************************************
  * BST ITERATOR :: DECREMENT PREFIX
