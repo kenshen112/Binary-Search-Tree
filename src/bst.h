@@ -89,6 +89,43 @@ namespace custom
       
    };
 
+    template <class T>
+       class BST <T> ::iterator
+    {
+
+      public:
+       BNode <T> *p;
+
+
+       //Constructors/Destructor
+       iterator()
+       {
+          p = nullptr;
+       }
+
+       iterator(BNode <T> *pNewit)    //I think its just supposed to copy the itera\
+          tor, meaning just the pointer - Ken
+       {
+          this->p = pNewit;
+
+       }
+
+       iterator(const iterator &rhs)
+       {
+          this->p = rhs.p;
+       }
+
+       //OPERATORS, delcare em, stub em, define em right here.
+       // even you couldn't say no to that.
+       //                     OH YES WE COULD
+
+       iterator operator++();
+       iterator operator--();
+
+       
+    };
+       
+
 /**************************************************
  * BST ITERATOR :: DECREMENT PREFIX
  *     advance by one. 
@@ -138,11 +175,13 @@ namespace custom
       
       return *this;
    }
+   
 /**************************************************
  *BST ITERATOR::INCREMENT PREFIX
  *so I copied the decrement operator above and
  *  just switched pLeft to pRight and vice versa
  *************************************************/
+   template <class T>
    typename BST <T> :: iterator & BST <T> :: iterator :: operator ++ ()
    {
       // do nothing if we have nothing
