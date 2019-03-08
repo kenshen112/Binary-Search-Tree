@@ -240,10 +240,10 @@ namespace custom
 		   root->parent = true;
 	   }
    
-	   if (root->black == true && root->parent == true)
+	   if (root->black == true && root->parent == true) //case 2
 	   {
-
-   
+		   root->pParent = new BNode<T>(item);
+			  
 	   }
 
 
