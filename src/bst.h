@@ -187,6 +187,20 @@ namespace custom
 
 
    
+   template<class T>
+   void BST<T>::insert(T item)
+   {
+   
+	   bool red
+
+	   if (root == nullptr) // case 1 tree is black
+	   {
+		   root = new BNode<T>(item);
+	   }
+   
+   
+   }
+
    template <class T>
       void BST<T>::erase(iterator it)
    {
