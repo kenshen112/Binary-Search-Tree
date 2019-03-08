@@ -38,6 +38,7 @@ namespace custom
       ~BST()
       {
          deleteBinaryTree(root);
+		 numElements = 0;
       }
       BST(const BST <T> *rhs)
        {
@@ -227,6 +228,13 @@ namespace custom
 
    
    template<class T>
+   void BST<T>::clear()
+   {
+	   deleteBinaryTree(root);
+	   numElements = 0;
+   }
+
+   template<class T>
    void BST<T>::insert(T item)
    {
   
@@ -333,7 +341,24 @@ namespace custom
    }
 
    
-   
+/************************************************
+* Find:
+* Searches the Binary Search Tree for an item.
+************************************************/
+	  template <class T>
+	  BST<T>::iterator find(T itemToFind) {
+		  for (iterator it = itemToFind; tempNode; tempNode = tempNode->pNext)
+		  {
+			  if (tempNode->data == itemToFind)
+			  {
+				  return tempNode;
+			  }
+		  }
+
+		  return nullptr;
+	  }
+
+
 } // namespace custom
 
 #endif // BST_H
