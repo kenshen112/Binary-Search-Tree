@@ -251,7 +251,8 @@ namespace custom
    template <class T>
       void BST<T>::erase(iterator it)
    {
-      
+
+      //CASE 1: NO children
       if (its->p->pRight == nullptr && it->p->pLeft == nullptr) // there aint no children up in here mmm hmmm das what i'm sayin.
       {
          
@@ -273,7 +274,8 @@ namespace custom
             it->p = nullptr;
          }
       }
-      
+
+      //CASE 2: One Child
       if (it->p->pRight != nullptr && it->p->pLeft == nullptr)
       {//we have a left child, but no right children
          it->p->pRight->pParent = it->p->pParent;
@@ -303,7 +305,11 @@ namespace custom
             it->p->pParent->p->pLeft = it->p->pLeft;
          }
       }
-      //what if we have two children??
+      
+      //CASE 3: Two Children
+      //Find the in-order successor(ios)
+      //Traverse the BST in-order until you find the node to be deleted
+      //then iterate one node past that and you've found the ios!
    }
 
    
