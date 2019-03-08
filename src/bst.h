@@ -38,6 +38,7 @@ namespace custom
       ~BST()
       {
          deleteBinaryTree(root);
+		 numElements = 0;
       }
       BST(const BST <T> *rhs)
        {
@@ -227,11 +228,16 @@ namespace custom
 
    
    template<class T>
+   void BST<T>::clear()
+   {
+	   deleteBinaryTree(root);
+	   numElements = 0;
+   }
+
+   template<class T>
    void BST<T>::insert(T item)
    {
-   
-
-
+  
 	   if (root == nullptr) // case 1 tree is black
 	   {
 		   root = new BNode<T>(item); // This node is black yo!
@@ -239,11 +245,39 @@ namespace custom
 		   root->parent = true;
 	   }
    
-	   if (root->black == true && root->parent == true) //case 2
+	   if (item > root->data)
+	   {
+		   root->pRight = new Node<T>(item); // need a loop to search for nullptr or something along those lines.
+	   }
+	   
+	   else if (item < root->data)
+	   {
+		   root->pLeft = new Node<T>(item);
+	   }
+	   
+	   
+	   
+	   
+	   
+// A Baisc structure of Red Black Balencing 	   
+	   if (root->black == true && root->parent == true) //case 2 Might we be missing a circumstance here?
 	   {
 		   root->pParent = new BNode<T>(item);
-			  
+		   root->pParent->red = true;
 	   }
+
+
+	   if (root->black && root->pParent->red && root->pRight->red) // Case 3 the recolor
+	   {
+		   root->black = false;
+		   root->red = true;
+		   root->pParent->red = false;
+		   root->pParent->black = true;
+		   root->pRight->red = false;
+		   root->pRight->black = true;
+	   }
+
+	   if (item)
 
 
    }
@@ -313,7 +347,24 @@ namespace custom
    }
 
    
-   
+/************************************************
+* Find:
+* Searches the Binary Search Tree for an item.
+************************************************/
+	  template <class T>
+	  BST<T>::iterator find(T itemToFind) {
+		  for (iterator it = itemToFind; tempNode; tempNode = tempNode->pNext)
+		  {
+			  if (tempNode->data == itemToFind)
+			  {
+				  return tempNode;
+			  }
+		  }
+
+		  return nullptr;
+	  }
+
+
 } // namespace custom
 
 #endif // BST_H
