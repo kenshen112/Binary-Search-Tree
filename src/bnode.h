@@ -16,6 +16,9 @@ public:
    BNode <T> *pLeft;
    BNode <T> *pRight;
    
+   bool red;
+   bool black;
+   bool parent;
    
    BNode()
    {

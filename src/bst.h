@@ -231,14 +231,22 @@ namespace custom
    void BST<T>::insert(T item)
    {
    
-	   bool red
+
 
 	   if (root == nullptr) // case 1 tree is black
 	   {
-		   root = new BNode<T>(item);
+		   root = new BNode<T>(item); // This node is black yo!
+		   root->black = true;
+		   root->parent = true;
 	   }
    
+	   if (root->black == true && root->parent == true)
+	   {
+
    
+	   }
+
+
    }
 
    template <class T>
