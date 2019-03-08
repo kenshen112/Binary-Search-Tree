@@ -103,8 +103,7 @@ namespace custom
           p = nullptr;
        }
 
-       iterator(BNode <T> *pNewit)    //I think its just supposed to copy the itera\
-          tor, meaning just the pointer - Ken
+       iterator(BNode <T> *pNewit)
        {
           this->p = pNewit;
 
@@ -253,49 +252,58 @@ namespace custom
       void BST<T>::erase(iterator it)
    {
       
-      if (it.pRight == nullptr && it.pLeft == nullptr) // there aint no children up in here mmm hmmm das what i'm sayin.
+      if (its->p->pRight == nullptr && it->p->pLeft == nullptr) // there aint no children up in here mmm hmmm das what i'm sayin.
       {
-         if (it.pParent != nullptr && it.pParent.pRight == it)
-         {
-            it.pParent.pRight = nullptr;
-         }
          
-         else if (it.pParent != nullptr && it.pParent.pLeft == it)
-         {
-            it.pParent.pRight = nullptr;
+         if (it->p->pParent != nullptr && it->p->pParent->pRight == it->p)
+         {//we are on the right of a parent
+            it->p->pParent->pRight = nullptr;
+            delete it->p;
+            it->p = nullptr;
+         }
+         else if (it->p->pParent != nullptr && it->p->pParent->pLeft == it->p)
+         {//we are on the left of a parent
+            it->p->pParent->pLeft = nullptr;
+            delete it->p;
+            it->p = nullptr;
+         }
+         else if (it->p->pParent == nullptr)
+         {//there is no parent
+            delete it->p;
+            it->p = nullptr;
          }
       }
       
-      if (it.pRight != nullptr && it.pLeft == nullptr)
-      {
-         it.pRight.pParent = it.pParent;
+      if (it->p->pRight != nullptr && it->p->pLeft == nullptr)
+      {//we have a left child, but no right children
+         it->p->pRight->pParent = it->p->pParent;
          
-         if (it.pParent != nullptr && it.pParent.pRight == it)
+         if (it->p->pParent != nullptr && it->p->pParent->pRight == it->p)
          {
-            it.pParent.pRight = it.pRight;
+            it->p->pParent->pRight = it->p->pRight;
          }
          
-         if (it.pParent != nullptr && it.pParent.pLeft == it)
+         if (it->p->pParent != nullptr && it->p->pParent->p->pLeft == it->p)
          {
-            it.pParent.pLeft = it.pRight;
-         }
-      }
-      
-      if (it.pRight == nullptr && it.pLeft != nullptr)
-      {
-         it.pLeft.pParent = it.pParent;
-         
-         if (it.pParent != nullptr && it.pParent->pRight == it)
-         {
-            it.pParent->pRight = it.pLeft;
-         }
-         
-         if (it.pParent != nullptr && it.pParent->pLeft == it)
-         {
-            it.pParent.pLeft = it.pLeft;
+            it->p->pParent->pLeft = it->p->pRight;
          }
       }
       
+      if (it->p->pRight == nullptr && it->p->pLeft != nullptr)
+      {//we have a right child but not a left one
+         it->p->pLeft->pParent = it->p->pParent;
+         
+         if (it->p->pParent != nullptr && it->p->pParent->pRight == it->)
+         {
+            it->p->pParent->pRight = it->p->pLeft;
+         }
+         
+         if (it->p->pParent != nullptr && it->p->pParent->pLeft == it->p)
+         {
+            it->p->pParent->p->pLeft = it->p->pLeft;
+         }
+      }
+      //what if we have two children??
    }
 
    
