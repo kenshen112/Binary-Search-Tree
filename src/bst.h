@@ -133,7 +133,7 @@ namespace custom
  * Performance: O(log n) though O(1) in the common case
  *************************************************/
    template <class T>
-      typename BST <T> :: iterator & BST <T> :: iterator :: operator -- ()
+      typename BST<T>::iterator BST<T>::iterator::operator--()
    {
       // do nothing if we have nothing
       if (pNode == nullptr) // rember always use nullptr instead of NULL
@@ -182,7 +182,7 @@ namespace custom
  *  just switched pLeft to pRight and vice versa
  *************************************************/
    template <class T>
-   typename BST <T> :: iterator & BST <T> :: iterator :: operator ++ ()
+   typename BST <T>::iterator BST<T>::iterator::operator++()
    {
       // do nothing if we have nothing
       if (pNode == nullptr) // rember always use nullptr instead of NULL
@@ -224,6 +224,7 @@ namespace custom
       return *this;
    }
 
+  
 
    
    template<class T>
