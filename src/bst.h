@@ -375,6 +375,7 @@ namespace custom
  *DELETE BINARY TREE
  *deletes an entire BST
  ****************************************************/
+template <class T>
    void BST <T> :: deleteBinaryTree(BNode <T> *deletor)
    {
       
