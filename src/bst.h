@@ -208,7 +208,7 @@ namespace custom
  * Performance: O(log n) though O(1) in the common case
  *************************************************/
    template <class T>
-      typename BST<T>::iterator BST<T>::iterator::operator--(int i)
+      typename BST<T>::iterator BST<T>::iterator::operator--(int)
    {
       BNode<T> *pNode = p;
       
@@ -342,7 +342,7 @@ namespace custom
  *  just switched pLeft to pRight and vice versa
  *************************************************/
    template <class T>
-      typename BST <T>::iterator BST<T>::iterator::operator++(int i)
+      typename BST <T>::iterator BST<T>::iterator::operator++(int)
    {
       BNode<T> *pNode = p;
       
