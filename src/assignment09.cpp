@@ -165,8 +165,12 @@ ostream & operator << (ostream & out, BST <T> & rhs)
 
 #ifdef TEST3
    typename BST <T> :: iterator it;
+   out << "we declared an iterator, we are about to declare the for loop\n";
    for (it = rhs.begin(); it != rhs.end(); it++)
+   {
+      out << "we are in the for loop now\n";
       out << "  " << *it;
+   }
 #endif // TEST3
    
    out << "  }";

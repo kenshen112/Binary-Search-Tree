@@ -119,16 +119,23 @@ namespace custom
           this->p = rhs.p;
        }
 
+       iterator operator = (const iterator &rhs)
+       {
+          std::cerr << "iterator assignment operator\n";
+          return *this.p = rhs.p;
+       }
+
 	   
        bool operator!=(iterator it)
        {
-          return *this != it;
+          std::cerr << "not equeals operator\n";
+          return this->p != it.p;
 	  
        }
        
        bool operator==(iterator it)
        {
-          return *this == it;
+          return *this->p == it.p;
        }
        
 
@@ -143,7 +150,7 @@ namespace custom
 	   
        T& operator*()
        {
-          std::cout << "we are in here\n";
+          std::cerr << "we are in the dereference operator\n";
           if(p)
           {
              return p->data;
@@ -265,6 +272,10 @@ namespace custom
    template <class T>
       typename BST<T>::iterator BST<T>::rbegin()	  
    {
+      if(root == nullptr)
+      {
+         return iterator(nullptr);
+      }
       BNode <T> *pNew;
       pNew = root;
       
@@ -616,6 +627,10 @@ template <class T>
 	template<class T>
 	typename BST<T>::iterator BST<T>::begin()
 	 {
+            if(root == nullptr)
+            {
+               return iterator(nullptr);
+            }
             BNode <T> *pNew;
             pNew = root;
 
