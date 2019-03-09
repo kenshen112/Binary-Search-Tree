@@ -121,14 +121,14 @@ namespace custom
 
        iterator operator = (const iterator &rhs)
        {
-          std::cerr << "iterator assignment operator\n";
+          //std::cerr << "iterator assignment operator\n";
           return this->p = rhs.p;
        }
 
 	   
        bool operator!=(iterator it)
        {
-          std::cerr << "not equeals operator\n";
+          //std::cerr << "not equeals operator\n";
           return this->p != it.p;
 	  
        }
@@ -150,7 +150,7 @@ namespace custom
 	   
        T& operator*()
        {
-          std::cerr << "we are in the dereference operator\n";
+          //std::cerr << "we are in the dereference operator\n";
           if(p)
           {
              return p->data;
@@ -304,7 +304,7 @@ namespace custom
    {
       BNode<T> *pNode = p;
 
-	  std::cerr << "MMM Prefix Donught" << std::endl;
+	  //std::cerr << "MMM Prefix Donught" << std::endl;
 
       // do nothing if we have nothing
       if (pNode == nullptr) // rember always use nullptr instead of NULL
@@ -355,7 +355,7 @@ namespace custom
       typename BST <T>::iterator BST<T>::iterator::operator++(int)
    {
     
-		  std::cerr << "MMM Postfix donught" << std::endl;
+		  //std::cerr << "MMM Postfix donught" << std::endl;
 
       // do nothing if we have nothing
       if (p == nullptr) // rember always use nullptr instead of NULL
@@ -384,7 +384,7 @@ namespace custom
          return *this;
       
       // if we are the right*left*-child, got to the parent.
-      if (pSave == p->pLeft)
+      if (p == p->pLeft)
          return *this;
       // we are the left*right*-child, go up as long as we are the left *right* child!
       while (nullptr != p && pSave == p->pRight)
@@ -393,7 +393,7 @@ namespace custom
          p = p->pParent;
       }
       
-      return p;
+      return *this;
    }
 
 /****************************************************
@@ -417,7 +417,7 @@ template <class T>
       deletor = nullptr;
       if(deletor == NULL)
       {
-         std::cerr << "its null now\n";
+         //std::cerr << "its null now\n";
       }
       
       
@@ -634,12 +634,12 @@ template <class T>
             {
                return iterator(nullptr);
             }
-            BNode <T> *pNew;
-            pNew = root;
+            BNode <T> *pNew = root;
 
             while(pNew->pLeft)
             {
                pNew = pNew->pLeft;
+			   std::cout << pNew->data << std::endl;
             }
             
             return iterator (pNew);
