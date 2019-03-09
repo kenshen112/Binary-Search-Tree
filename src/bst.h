@@ -29,7 +29,10 @@ namespace custom
       iterator find(T itemToFind);
       iterator begin();
       iterator end();
-      
+	  iterator rbegin();
+	  iterator rend();
+
+
       BST()
       {
          root = nullptr;
@@ -89,14 +92,7 @@ namespace custom
       void copyBinaryTree(BNode<T> *copySource, BNode <T> *copyDest);
 	  void balence(BST<T>* tree);
 
-
-	  iterator begin();
-	  iterator end();
-
-	  iterator rbegin();
-	  iterator rend();
-
-   };
+	  };
 
     template <class T>
        class BST <T> ::iterator
@@ -268,22 +264,6 @@ namespace custom
 	   {
 		   return iterator(root);
 	   }
-
-
-
-	  template <class T>
-	  typename BST<T>::iterator BST<T>::end()
-	  {
-		  return iterator(nullptr);
-	  }
-
-	  template <class T>
-	  typename BST<T>::iterator BST<T>::begin()
-	  {
-		  return iterator(root);
-	  }
-
-
 
 /**************************************************
  *BST ITERATOR::INCREMENT PREFIX
@@ -529,6 +509,18 @@ namespace custom
 			 tree->root->pRight->black = true;
 		 } 
 	 }
+
+	template<class T>
+	typename BST<T>::iterator BST<T>::begin()
+	 {
+		return iterator(root);
+	}
+
+	template<class T>
+	typename BST<T>::iterator BST<T>::end()
+	{
+		return iterator(nullptr);
+	}
 
    
 /************************************************
