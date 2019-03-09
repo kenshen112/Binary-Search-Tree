@@ -101,7 +101,7 @@ namespace custom
 
       public:
        BNode <T> *p;
-	   stack <BNode*> current;
+	   stack <BNode<T>*> current;
 
        //Constructors/Destructor
        iterator()
