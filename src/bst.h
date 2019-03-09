@@ -303,22 +303,24 @@ namespace custom
    template <class T>
    typename BST <T>::iterator BST<T>::iterator::operator++()
    {
-      current.push(p);
+      BNode<T> *pNode = p;
 
       // do nothing if we have nothing
-      if (current.data == nullptr) // rember always use nullptr instead of NULL
+      if (pNode == nullptr) // rember always use nullptr instead of NULL
          return *this;
  
 
       //   if there is a left *right* node, take it
-      if (nullptr != current.data->pRight)
+      if (nullptr != pNode->pRight)
       {
          // go left *right*
-         current.data = pNode->pRight;
+        pNode = pNode->pRight;
+		current.push(pNode);
             
          //jig right *left?* - there might be more right*left*-most children
          while (pNode->pLeft)
             pNode = pNode->pLeft;
+		 current.push(pNode);
          return *this;
       }
       
@@ -327,7 +329,7 @@ namespace custom
       BNode<T> * pSave = pNode;
       
       // go up
-      pNode = pNode->pParent;
+      current.push(pNode = pNode->pParent);
       
       // if the parent is the NULL, we are done!
       if (nullptr == pNode)
@@ -341,6 +343,7 @@ namespace custom
       {
          pSave = pNode;
          pNode = pNode->pParent;
+		 current.push(pNode);
       }
       
       return *this;
