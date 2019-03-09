@@ -40,8 +40,8 @@ namespace custom
       }
       ~BST()
       {
-         //deleteBinaryTree(root);
-		 numElements = 0;
+         deleteBinaryTree(root);
+         numElements = 0;
       }
       BST(const BST <T> *rhs)
        {
