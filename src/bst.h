@@ -89,7 +89,8 @@ namespace custom
       void copyBinaryTree(BNode<T> *copySource, BNode <T> *copyDest);
 	  void balence(BST<T>* tree);
 
-
+	  iterator rbegin();
+	   iterator rend();
 
    };
 
@@ -118,13 +119,22 @@ namespace custom
           this->p = rhs.p;
        }
 
+	   
+	   bool operator!=(iterator it)
+	   {
+		   return *this != it;
+	  
+	   }
+
+
        //OPERATORS, delcare em, stub em, define em right here.
        // even you couldn't say no to that.
        //                     OH YES WE COULD
 
        iterator operator++();
        iterator operator--();
-	   iterator operator*()
+	   
+	   T& operator*()
 	   {
 		   return p->data;
 	   }
@@ -184,8 +194,19 @@ namespace custom
       
       return *this;
    }
-   
-/**************************************************
+      template <class T>
+	  typename BST<T>::iterator BST<T>::rbegin()	  
+	  { 
+		   return iterator(nullptr);		  
+	  }
+	   
+	  template <class T>  
+	  typename BST<T>::iterator BST<T>::rend()
+	   {
+		   return iterator(root);
+	   }
+
+	  /**************************************************
  *BST ITERATOR::INCREMENT PREFIX
  *so I copied the decrement operator above and
  *  just switched pLeft to pRight and vice versa
