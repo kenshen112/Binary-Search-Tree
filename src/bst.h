@@ -251,16 +251,19 @@ namespace custom
 		   root = new BNode<T>(item); // This node is black yo!
 		   root->black = true;
 		   root->parent = true;
+		   numElements++;
       }
       
       if (item > root->data)
       {
          root->pRight = new BNode<T>(item); // need a loop to search for nullptr or something along those lines.
+		 numElements++;
       }
       
       else if (item < root->data)
       {
          root->pLeft = new BNode<T>(item);
+		 numElements++;
       }               
    }
 
