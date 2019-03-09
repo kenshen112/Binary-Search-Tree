@@ -89,8 +89,12 @@ namespace custom
       void copyBinaryTree(BNode<T> *copySource, BNode <T> *copyDest);
 	  void balence(BST<T>* tree);
 
+
+	  iterator begin();
+	  iterator end();
+
 	  iterator rbegin();
-	   iterator rend();
+	  iterator rend();
 
    };
 
@@ -153,7 +157,7 @@ namespace custom
    template <class T>
       typename BST<T>::iterator BST<T>::iterator::operator--()
    {
-		  BNode<T> *pNode = root;
+		  BNode<T> *pNode = p;
 
 
       // do nothing if we have nothing
@@ -206,7 +210,7 @@ namespace custom
    template <class T>
       typename BST<T>::iterator BST<T>::iterator::operator--(int i)
    {
-      BNode<T> *pNode = root;
+      BNode<T> *pNode = p;
       
       
       // do nothing if we have nothing
@@ -250,6 +254,8 @@ namespace custom
    }
    
 /**************************************************
+* Reverse Begin
+***************************************************/
 
       template <class T>
 	  typename BST<T>::iterator BST<T>::rbegin()	  
@@ -262,6 +268,22 @@ namespace custom
 	   {
 		   return iterator(root);
 	   }
+
+
+
+	  template <class T>
+	  typename BST<T>::iterator BST<T>::end()
+	  {
+		  return iterator(nullptr);
+	  }
+
+	  template <class T>
+	  typename BST<T>::iterator BST<T>::begin()
+	  {
+		  return iterator(root);
+	  }
+
+
 
 /**************************************************
  *BST ITERATOR::INCREMENT PREFIX
@@ -322,7 +344,7 @@ namespace custom
    template <class T>
       typename BST <T>::iterator BST<T>::iterator::operator++(int i)
    {
-      BNode<T> *pNode = root;
+      BNode<T> *pNode = p;
       
       
       // do nothing if we have nothing
