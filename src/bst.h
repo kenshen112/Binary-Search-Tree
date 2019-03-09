@@ -122,7 +122,7 @@ namespace custom
        iterator operator = (const iterator &rhs)
        {
           std::cerr << "iterator assignment operator\n";
-          return *this = rhs;
+          return this->p = rhs.p;
        }
 
 	   
@@ -135,7 +135,7 @@ namespace custom
        
        bool operator==(iterator it)
        {
-          return *this == it;
+          return this->p == it.p;
        }
        
 
