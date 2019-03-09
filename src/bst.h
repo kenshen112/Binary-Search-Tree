@@ -8,6 +8,7 @@
  *    Create a binary search tree
  ************************************************************************/
 #include "bnode.h"
+#include "stack.h"
 #ifndef BST_H
 #define BST_H
 
@@ -100,7 +101,7 @@ namespace custom
 
       public:
        BNode <T> *p;
-
+	   stack <BNode*> current;
 
        //Constructors/Destructor
        iterator()
@@ -302,18 +303,18 @@ namespace custom
    template <class T>
    typename BST <T>::iterator BST<T>::iterator::operator++()
    {
-      BNode<T> *pNode = p;
-
+      current.push(p);
 
       // do nothing if we have nothing
-      if (pNode == nullptr) // rember always use nullptr instead of NULL
+      if (current.data == nullptr) // rember always use nullptr instead of NULL
          return *this;
-      
+ 
+
       //   if there is a left *right* node, take it
-      if (nullptr != pNode->pRight)
+      if (nullptr != current.data->pRight)
       {
          // go left *right*
-         pNode = pNode->pRight;
+         current.data = pNode->pRight;
             
          //jig right *left?* - there might be more right*left*-most children
          while (pNode->pLeft)

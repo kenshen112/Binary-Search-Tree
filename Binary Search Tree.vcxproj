@@ -111,6 +111,7 @@
     <ClInclude Include="src\huffman.h" />
     <ClInclude Include="src\node.h" />
     <ClInclude Include="src\pair.h" />
+    <ClInclude Include="src\stack.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\huffman1.txt" />
