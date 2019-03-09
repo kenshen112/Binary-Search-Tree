@@ -124,7 +124,10 @@ namespace custom
 
        iterator operator++();
        iterator operator--();
-
+	   iterator operator*()
+	   {
+		   return p->data;
+	   }
        
     };
        
