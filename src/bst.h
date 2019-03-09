@@ -29,8 +29,8 @@ namespace custom
       iterator find(T itemToFind);
       iterator begin();
       iterator end();
-	  iterator rbegin();
-	  iterator rend();
+      iterator rbegin();
+      iterator rend();
 
 
       BST()
@@ -120,17 +120,17 @@ namespace custom
        }
 
 	   
-	   bool operator!=(iterator it)
-	   {
-		   return *this != it;
+       bool operator!=(iterator it)
+       {
+          return *this != it;
 	  
-	   }
-
-	   bool operator==(iterator it)
-	   {
-		   return *this == it;
-	   }
-
+       }
+       
+       bool operator==(iterator it)
+       {
+          return *this == it;
+       }
+       
 
        //OPERATORS, delcare em, stub em, define em right here.
        // even you couldn't say no to that.
@@ -141,10 +141,10 @@ namespace custom
        iterator operator--();
        iterator operator--(int);//postfix
 	   
-	   T& operator*()
-	   {
-		   return p->data;
-	   }
+       T& operator*()
+       {
+          return p->data;
+       }
        
     };
        
@@ -544,8 +544,16 @@ template <class T>
 	template<class T>
 	typename BST<T>::iterator BST<T>::begin()
 	 {
-		return iterator(root);
-	}
+            BNode <T> *pNew;
+            pNew = root;
+
+            while(pNew->pLeft)
+            {
+               pNew = pNew->pLeft;
+            }
+            
+            return iterator (pNew);
+         }
 
 	template<class T>
 	typename BST<T>::iterator BST<T>::end()
@@ -557,20 +565,21 @@ template <class T>
 /************************************************
 * Find:
 * Searches the Binary Search Tree for an item.
-************************************************/
-	  template <class T>
-	  typename BST<T>::iterator BST<T>::find(T itemToFind) {
-		  for (iterator it = itemToFind; it != nullptr; it = it->p->pNext)
-		  {
-			  if (it->p->data == itemToFind)
-			  {
-				  return it;
-			  }
-		  }
-
-		  return nullptr;
-	  }
-
+v************************************************/
+        template <class T>
+           typename BST<T>::iterator BST<T>::find(T itemToFind)
+        {
+           for (iterator it = begin(); it != nullptr; it++)
+           {
+              if (*it == itemToFind)
+              {
+                 return it;
+              }
+           }
+           
+           return nullptr;
+        }
+        
 
 } // namespace custom
 
