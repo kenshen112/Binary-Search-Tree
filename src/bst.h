@@ -333,9 +333,24 @@ namespace custom
       }
       
       //CASE 3: Two Children
-      //Find the in-order successor(ios)
-      //Traverse the BST in-order until you find the node to be deleted
-      //then iterate one node past that and you've found the ios!
+      if(it->p->pRight != nullptr && it->p->pLeft != nullptr)
+      {
+         iterator ios = it;
+         ++ios;
+         assert(ios->p->pLeft == nullptr); //ios should NOT have a left child
+
+         if(ios->p->pRight != nullptr)
+         {
+            it->p->pRight->pParent = ios->p; //change it->p to ios
+            ios->p->pRight->pParent = ios->pRight; //move ios's right child to ios's spot
+            delete it->p;
+         }
+         else
+         {
+            it->p->pRight->pParent = ios->p;
+            delete it->p;
+         }
+      }
    }
 
 	  template<class T>
