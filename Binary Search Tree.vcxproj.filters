@@ -15,15 +15,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\assignment08.cpp">
+    <ClCompile Include="src\huffman.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\huffman.cpp">
+    <ClCompile Include="src\assignment09.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\assignment08.out" />
     <None Include="src\makefile" />
   </ItemGroup>
   <ItemGroup>

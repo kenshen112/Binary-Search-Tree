@@ -255,12 +255,12 @@ namespace custom
       
       if (item > root->data)
       {
-         root->pRight = new Node<T>(item); // need a loop to search for nullptr or something along those lines.
+         root->pRight = new BNode<T>(item); // need a loop to search for nullptr or something along those lines.
       }
       
       else if (item < root->data)
       {
-         root->pLeft = new Node<T>(item);
+         root->pLeft = new BNode<T>(item);
       }               
    }
 

@@ -99,11 +99,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\assignment08.cpp" />
+    <ClCompile Include="src\assignment09.cpp" />
     <ClCompile Include="src\huffman.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\assignment08.out" />
     <None Include="src\makefile" />
   </ItemGroup>
   <ItemGroup>
