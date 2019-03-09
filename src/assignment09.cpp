@@ -193,9 +193,11 @@ void testIterate()
    //
    try
    {
+	   std::cerr << "this is test iterate" << std::endl;
       BST <bool> tree;      
       cout << "Empty tree\n";
       cout << "\tSize:     " << tree.size() << endl;
+	  std::cerr << "Contents" << std::endl;
       cout << "\tContents: " << tree        << endl;
    }
    catch (const char * s)
