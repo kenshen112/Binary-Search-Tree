@@ -237,49 +237,50 @@ namespace custom
    template<class T>
    void BST<T>::insert(T item)
    {
-  
-	   if (root == nullptr) // case 1 tree is black
+      
+      if (root == nullptr) // case 1 tree is black
+      {
+         root = new BNode<T>(item); // This node is black yo!
+         root->black = true;
+         root->parent = true;
+      }
+      
+      if (item > root->data)
+      {
+         root->pRight = new Node<T>(item); // need a loop to search for nullptr or something along those lines.
+      }
+      
+      else if (item < root->data)
+      {
+         root->pLeft = new Node<T>(item);
+      }
+      
+      
+      
+      
+      
+      //   A Baisc structure of Red Black Balencing 	   
+      if (root->black == true && root->parent == true) //case 2 Might we be missing a circumstance here?
 	   {
-		   root = new BNode<T>(item); // This node is black yo!
-		   root->black = true;
-		   root->parent = true;
+              root->pParent = new BNode<T>(item);
+              root->pParent->red = true;
 	   }
-   
-	   if (item > root->data)
-	   {
-		   root->pRight = new Node<T>(item); // need a loop to search for nullptr or something along those lines.
-	   }
-	   
-	   else if (item < root->data)
-	   {
-		   root->pLeft = new Node<T>(item);
-	   }
-	   
-	   
-	   
-	   
-	   
-// A Baisc structure of Red Black Balencing 	   
-	   if (root->black == true && root->parent == true) //case 2 Might we be missing a circumstance here?
-	   {
-		   root->pParent = new BNode<T>(item);
-		   root->pParent->red = true;
-	   }
-
-
-	   if (root->black && root->pParent->red && root->pRight->red) // Case 3 the recolor
-	   {
-		   root->black = false;
-		   root->red = true;
-		   root->pParent->red = false;
-		   root->pParent->black = true;
-		   root->pRight->red = false;
-		   root->pRight->black = true;
-	   }
-
-	   if (item)
-
-
+      
+      
+      if (root->black && root->pParent->red && root->pRight->red) // Case 3 the recolor
+      {
+         root->black = false;
+         root->red = true;
+         root->pParent->red = false;
+         root->pParent->black = true;
+         root->pRight->red = false;
+         root->pRight->black = true;
+      }
+      
+      if (item)
+      {
+         
+      }
    }
 
    template <class T>
