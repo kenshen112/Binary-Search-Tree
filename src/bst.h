@@ -123,7 +123,9 @@ namespace custom
        //                     OH YES WE COULD
 
        iterator operator++();
+       iterator operator++(int);//postfix
        iterator operator--();
+       iterator operator--(int);//postfix
 	   iterator operator*()
 	   {
 		   return p->data;
@@ -184,6 +186,57 @@ namespace custom
       
       return *this;
    }
+/**************************************************
+ * BST ITERATOR :: DECREMENT POSTFIX
+ *     advance by one.
+ * Author:      Br. Helfrich
+ * Performance: O(log n) though O(1) in the common case
+ *************************************************/
+   template <class T>
+      typename BST<T>::iterator BST<T>::iterator::operator--(int i)
+   {
+      BNode<T> *pNode = root;
+      
+      
+      // do nothing if we have nothing
+      if (pNode == nullptr) // rember always use nullptr instead of NULL
+         return *this;
+      
+      //   if there is a left node, take it
+      if (nullptr != pNode->pLeft)
+      {
+         // go left
+         pNode = pNode->pLeft;
+         
+         //jig right - there might be more right-most children
+         while (pNode->pRight)
+            pNode = pNode->pRight;
+         return *this;
+      }
+      
+      // there are no left children, the right are done
+      assert(nullptr == pNode->pLeft);
+      BNode<T> * pSave = pNode;
+      
+      // go up
+      pNode = pNode->pParent;
+      
+      // if the parent is the NULL, we are done!
+      if (nullptr == pNode)
+         return *this;
+      
+      // if we are the right-child, got to the parent.
+      if (pSave == pNode->pRight)
+         return *this;
+// we are the left-child, go up as long as we are the left child!
+      while (nullptr != pNode && pSave == pNode->pLeft)
+      {
+         pSave = pNode;
+         pNode = pNode->pParent;
+      }
+      
+      return *this;
+   }
    
 /**************************************************
  *BST ITERATOR::INCREMENT PREFIX
@@ -236,7 +289,56 @@ namespace custom
       return *this;
    }
 
-  
+/**************************************************
+ *BST ITERATOR::INCREMENT POSTFIX
+ *so I copied the decrement operator above and
+ *  just switched pLeft to pRight and vice versa
+ *************************************************/
+   template <class T>
+      typename BST <T>::iterator BST<T>::iterator::operator++(int i)
+   {
+      BNode<T> *pNode = root;
+      
+      
+      // do nothing if we have nothing
+      if (pNode == nullptr) // rember always use nullptr instead of NULL
+         return *this;
+      
+      //   if there is a left *right* node, take it
+      if (nullptr != pNode->pRight)
+      {
+         // go left *right*
+         pNode = pNode->pRight;
+         
+         //jig right *left?* - there might be more right*left*-most children
+         while (pNode->pLeft)
+            pNode = pNode->pLeft;
+         return *this;
+      }
+      
+      // there are no left *right* children, the right *left* are done
+      assert(nullptr == pNode->pRight);
+      BNode<T> * pSave = pNode;
+      // go up
+      pNode = pNode->pParent;
+      
+      // if the parent is the NULL, we are done!
+      if (nullptr == pNode)
+         return *this;
+      
+      // if we are the right*left*-child, got to the parent.
+      if (pSave == pNode->pLeft)
+         return *this;
+      // we are the left*right*-child, go up as long as we are the left *right* child!
+      while (nullptr != pNode && pSave == pNode->pRight)
+      {
+         pSave = pNode;
+         pNode = pNode->pParent;
+      }
+      
+      return *this;
+   }
+   
 
    
    template<class T>
