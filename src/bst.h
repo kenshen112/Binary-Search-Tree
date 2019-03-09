@@ -267,6 +267,10 @@ namespace custom
       }               
    }
 
+/*********************************************
+ *ERASE
+ *erases a node from the BST
+ ********************************************/
    template <class T>
       void BST<T>::erase(iterator it)
    {
