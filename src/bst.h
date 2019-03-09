@@ -122,7 +122,7 @@ namespace custom
        iterator operator = (const iterator &rhs)
        {
           std::cerr << "iterator assignment operator\n";
-          return *this.p = rhs.p;
+          return *this = rhs;
        }
 
 	   
@@ -135,7 +135,7 @@ namespace custom
        
        bool operator==(iterator it)
        {
-          return *this->p == it.p;
+          return *this == it;
        }
        
 
@@ -470,6 +470,7 @@ template <class T>
             {
                home = true;
                left = true;
+			   pPlace->pLeft = pNew;
             }
             else
                pPlace = pPlace->pLeft;
@@ -480,6 +481,7 @@ template <class T>
             {
                home = true;
                left = false;
+			   pPlace->pRight = pNew;
             }
             else
                pPlace = pPlace->pRight;
