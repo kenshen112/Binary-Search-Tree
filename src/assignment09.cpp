@@ -197,7 +197,7 @@ void testIterate()
       BST <bool> tree;      
       cout << "Empty tree\n";
       cout << "\tSize:     " << tree.size() << endl;
-	  std::cerr << "Contents" << std::endl;
+	  cout << "Contents" << std::endl;
       cout << "\tContents: " << tree        << endl;
    }
    catch (const char * s)
