@@ -304,6 +304,7 @@ namespace custom
    {
       BNode<T> *pNode = p;
 
+	  std::cerr << "MMM Prefix Donught" << std::endl;
 
       // do nothing if we have nothing
       if (pNode == nullptr) // rember always use nullptr instead of NULL
@@ -342,7 +343,7 @@ namespace custom
          pNode = pNode->pParent;
       }
       
-      return *this;
+      return pNode;
    }
 
 /**************************************************
@@ -353,46 +354,46 @@ namespace custom
    template <class T>
       typename BST <T>::iterator BST<T>::iterator::operator++(int)
    {
-      BNode<T> *pNode = p;
-      
-      
+    
+		  std::cerr << "MMM Postfix donught" << std::endl;
+
       // do nothing if we have nothing
-      if (pNode == nullptr) // rember always use nullptr instead of NULL
+      if (p == nullptr) // rember always use nullptr instead of NULL
          return *this;
       
       //   if there is a left *right* node, take it
-      if (nullptr != pNode->pRight)
+      if (nullptr != p->pRight)
       {
          // go left *right*
-         pNode = pNode->pRight;
+         p = p->pRight;
          
          //jig right *left?* - there might be more right*left*-most children
-         while (pNode->pLeft)
-            pNode = pNode->pLeft;
+         while (p->pLeft)
+            p = p->pLeft;
          return *this;
       }
       
       // there are no left *right* children, the right *left* are done
-      assert(nullptr == pNode->pRight);
-      BNode<T> * pSave = pNode;
+      assert(nullptr == p->pRight);
+      BNode<T> * pSave = p;
       // go up
-      pNode = pNode->pParent;
+      p = p->pParent;
       
       // if the parent is the NULL, we are done!
-      if (nullptr == pNode)
+      if (nullptr == p)
          return *this;
       
       // if we are the right*left*-child, got to the parent.
-      if (pSave == pNode->pLeft)
+      if (pSave == p->pLeft)
          return *this;
       // we are the left*right*-child, go up as long as we are the left *right* child!
-      while (nullptr != pNode && pSave == pNode->pRight)
+      while (nullptr != p && pSave == p->pRight)
       {
-         pSave = pNode;
-         pNode = pNode->pParent;
+         pSave = p;
+         p = p->pParent;
       }
       
-      return *this;
+      return p;
    }
 
 /****************************************************
