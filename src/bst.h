@@ -365,7 +365,32 @@ namespace custom
       
       return *this;
    }
-   
+
+/****************************************************
+ *DELETE BINARY TREE
+ *deletes an entire BST
+ ****************************************************/
+   void BST <T> :: deleteBinaryTree(BNode <T> *deletor)
+   {
+      
+      if(deletor == nullptr)
+      {
+         return;
+      }
+      
+      deleteBinaryTree(deletor->pLeft);
+      deleteBinaryTree(deletor->pRight);
+
+      delete deletor;
+
+      deletor = nullptr;
+      if(deletor == NULL)
+      {
+         std::cerr << "its null now\n";
+      }
+      
+      
+   }   
 
    
    template<class T>
