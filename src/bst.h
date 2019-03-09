@@ -29,8 +29,8 @@ namespace custom
       iterator find(T itemToFind);
       iterator begin();
       iterator end();
-	  iterator rbegin();
-	  iterator rend();
+      iterator rbegin();
+      iterator rend();
 
 
       BST()
@@ -90,9 +90,9 @@ namespace custom
       void deleteNode(BNode <T> *nodeToDelete, bool isRight);
       void deleteBinaryTree(BNode <T> *deletor);
       void copyBinaryTree(BNode<T> *copySource, BNode <T> *copyDest);
-	  void balence(BST<T>* tree);
+      void balence(BST<T>* tree);
 
-	  };
+   };
 
     template <class T>
        class BST <T> ::iterator
@@ -120,17 +120,17 @@ namespace custom
        }
 
 	   
-	   bool operator!=(iterator it)
-	   {
-		   return *this != it;
+       bool operator!=(iterator it)
+       {
+          return *this != it;
 	  
-	   }
-
-	   bool operator==(iterator it)
-	   {
-		   return *this == it;
-	   }
-
+       }
+       
+       bool operator==(iterator it)
+       {
+          return *this == it;
+       }
+       
 
        //OPERATORS, delcare em, stub em, define em right here.
        // even you couldn't say no to that.
@@ -141,10 +141,14 @@ namespace custom
        iterator operator--();
        iterator operator--(int);//postfix
 	   
-	   T& operator*()
-	   {
-		   return p->data;
-	   }
+       T& operator*()
+       {
+          std::cout << "we are in here\n";
+          if(p)
+          {
+             return p->data;
+          }
+       }
        
     };
        
@@ -158,8 +162,8 @@ namespace custom
    template <class T>
       typename BST<T>::iterator BST<T>::iterator::operator--()
    {
-		  BNode<T> *pNode = p;
-
+      BNode<T> *pNode = p;
+      
 
       // do nothing if we have nothing
       if (pNode == nullptr) // rember always use nullptr instead of NULL
@@ -257,19 +261,28 @@ namespace custom
 /**************************************************
 * Reverse Begin
 ***************************************************/
-
-      template <class T>
-	  typename BST<T>::iterator BST<T>::rbegin()	  
-	  { 
-		   return iterator(nullptr);		  
-	  }
-	   
-	  template <class T>  
-	  typename BST<T>::iterator BST<T>::rend()
-	   {
-		   return iterator(root);
-	   }
-
+   
+   template <class T>
+      typename BST<T>::iterator BST<T>::rbegin()	  
+   {
+      BNode <T> *pNew;
+      pNew = root;
+      
+      while(pNew->pRight)
+      {
+         pNew = pNew->pRight;
+      }
+      
+      return iterator (pNew);
+      
+   }
+   
+   template <class T>  
+      typename BST<T>::iterator BST<T>::rend()
+   {
+      return iterator(nullptr);
+   }
+   
 /**************************************************
  *BST ITERATOR::INCREMENT PREFIX
  *so I copied the decrement operator above and
@@ -278,7 +291,7 @@ namespace custom
    template <class T>
    typename BST <T>::iterator BST<T>::iterator::operator++()
    {
-	   BNode<T> *pNode = p;
+      BNode<T> *pNode = p;
 
 
       // do nothing if we have nothing
@@ -406,28 +419,87 @@ template <class T>
 	   numElements = 0;
    }
 
+   /***************************************************
+    * INSERT FOR BST
+    ************************************************/
    template<class T>
-   void BST<T>::insert(T item)
-   {   
-	   if (root == nullptr) // case 1 tree is black
-	   {
-		   root = new BNode<T>(item); // This node is black yo!
-		   root->black = true;
-		   root->parent = true;
-		   numElements++;
+      void BST<T>::insert(T item)
+   {
+      BNode <T> * pNew;
+      try
+      {
+         //make a new node
+         pNew = new BNode <T> (item);
+      }
+      catch (std::bad_alloc)
+      {
+         throw "Error: Unable to allocate a node";
       }
       
-      if (item > root->data)
+      //if the tree is currently empty
+      if (root == nullptr) // case 1 tree is black
       {
-         root->pRight = new BNode<T>(item); // need a loop to search for nullptr or something along those lines.
-		 numElements++;
+         root = pNew; // This node is black yo!
+         root->black = true;
+         root->parent = true;
+         numElements++;
+         return;
+      }
+      
+      //another pointer, to keep track of where we are as we find a home for pNew
+      BNode <T> * pPlace = root;
+      bool home = false; //to keep track of if we have found what we are looking for
+      bool left; //to tell us if we are adding left or right
+      
+      while(!home)
+      {
+         if(item <= pPlace->data) //otherwise do we need to go left?
+         {
+            if(pPlace->pLeft == nullptr)
+            {
+               home = true;
+               left = true;
+            }
+            else
+               pPlace = pPlace->pLeft;
+         }
+         else if(item >= pPlace->data) //or right?
+         {
+            if(pPlace->pRight == nullptr)
+            {
+               home = true;
+               left = false;
+            }
+            else
+               pPlace = pPlace->pRight;
+         }
+      }
+      //attach the pointers to link the new item into the tree.
+      
+      if(left)
+      {
+         pPlace->pLeft = pNew;
+         pNew->pParent = pPlace;
+      }
+      else
+      {
+         pPlace->pRight = pNew;
+         pNew->pParent = pPlace;
+      }
+      numElements++;
+      
+      
+/*      if (item > root->data)
+      {
+         BNode <T> * pNew = new BNode<T>(item);
+         numElements++;
       }
       
       else if (item < root->data)
       {
          root->pLeft = new BNode<T>(item);
-		 numElements++;
-      }               
+         numElements++;
+      }*/         
    }
 
 /*********************************************
@@ -544,8 +616,16 @@ template <class T>
 	template<class T>
 	typename BST<T>::iterator BST<T>::begin()
 	 {
-		return iterator(root);
-	}
+            BNode <T> *pNew;
+            pNew = root;
+
+            while(pNew->pLeft)
+            {
+               pNew = pNew->pLeft;
+            }
+            
+            return iterator (pNew);
+         }
 
 	template<class T>
 	typename BST<T>::iterator BST<T>::end()
@@ -557,20 +637,21 @@ template <class T>
 /************************************************
 * Find:
 * Searches the Binary Search Tree for an item.
-************************************************/
-	  template <class T>
-	  typename BST<T>::iterator BST<T>::find(T itemToFind) {
-		  for (iterator it = itemToFind; it != nullptr; it = it->p->pNext)
-		  {
-			  if (it->p->data == itemToFind)
-			  {
-				  return it;
-			  }
-		  }
-
-		  return nullptr;
-	  }
-
+v************************************************/
+        template <class T>
+           typename BST<T>::iterator BST<T>::find(T itemToFind)
+        {
+           for (iterator it = begin(); it != nullptr; it++)
+           {
+              if (*it == itemToFind)
+              {
+                 return it;
+              }
+           }
+           
+           return nullptr;
+        }
+        
 
 } // namespace custom
 
