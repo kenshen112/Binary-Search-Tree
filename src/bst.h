@@ -126,6 +126,11 @@ namespace custom
 	  
 	   }
 
+	   bool operator==(iterator it)
+	   {
+		   return *this == it;
+	   }
+
 
        //OPERATORS, delcare em, stub em, define em right here.
        // even you couldn't say no to that.
@@ -273,7 +278,7 @@ namespace custom
    template <class T>
    typename BST <T>::iterator BST<T>::iterator::operator++()
    {
-	   BNode<T> *pNode = root;
+	   BNode<T> *pNode = p;
 
 
       // do nothing if we have nothing
@@ -433,76 +438,76 @@ namespace custom
    {
 
       //CASE 1: NO children
-      if (it->p->pRight == nullptr && it->p->pLeft == nullptr) // there aint no children up in here mmm hmmm das what i'm sayin.
+      if (it.p->pRight == nullptr && it.p->pLeft == nullptr) // there aint no children up in here mmm hmmm das what i'm sayin.
       {
          
-         if (it->p->pParent != nullptr && it->p->pParent->pRight == it->p)
+         if (it.p->pParent != nullptr && it.p->pParent->pRight == it.p)
          {//we are on the right of a parent
-            it->p->pParent->pRight = nullptr;
-            delete it->p;
-            it->p = nullptr;
+            it.p->pParent->pRight = nullptr;
+            delete it.p;
+            it.p = nullptr;
          }
-         else if (it->p->pParent != nullptr && it->p->pParent->pLeft == it->p)
+         else if (it.p->pParent != nullptr && it.p->pParent->pLeft == it.p)
          {//we are on the left of a parent
-            it->p->pParent->pLeft = nullptr;
-            delete it->p;
-            it->p = nullptr;
+            it.p->pParent->pLeft = nullptr;
+            delete it.p;
+            it.p = nullptr;
          }
-         else if (it->p->pParent == nullptr)
+         else if (it.p->pParent == nullptr)
          {//there is no parent
-            delete it->p;
-            it->p = nullptr;
+            delete it.p;
+            it.p = nullptr;
          }
       }
 
       //CASE 2: One Child
-      if (it->p->pRight != nullptr && it->p->pLeft == nullptr)
+      if (it.p->pRight != nullptr && it.p->pLeft == nullptr)
       {//we have a left child, but no right children
-         it->p->pRight->pParent = it->p->pParent;
+         it.p->pRight->pParent = it.p->pParent;
          
-         if (it->p->pParent != nullptr && it->p->pParent->pRight == it->p)
+         if (it.p->pParent != nullptr && it.p->pParent->pRight == it.p)
          {
-            it->p->pParent->pRight = it->p->pRight;
+            it.p->pParent->pRight = it.p->pRight;
          }
          
-         if (it->p->pParent != nullptr && it->p->pParent->p->pLeft == it->p)
+         if (it.p->pParent != nullptr && it.p->pParent->pLeft == it.p)
          {
-            it->p->pParent->pLeft = it->p->pRight;
+            it.p->pParent->pLeft = it.p->pRight;
          }
       }
       
-      if (it->p->pRight == nullptr && it->p->pLeft != nullptr)
+      if (it.p->pRight == nullptr && it.p->pLeft != nullptr)
       {//we have a right child but not a left one
-         it->p->pLeft->pParent = it->p->pParent;
+         it.p->pLeft->pParent = it.p->pParent;
          
-         if (it->p->pParent != nullptr && it->p->pParent->pRight == it->p)
+         if (it.p->pParent != nullptr && it.p->pParent->pRight == it.p)
          {
-            it->p->pParent->pRight = it->p->pLeft;
+            it.p->pParent->pRight = it.p->pLeft;
          }
          
-         if (it->p->pParent != nullptr && it->p->pParent->pLeft == it->p)
+         if (it.p->pParent != nullptr && it.p->pParent->pLeft == it.p)
          {
-            it->p->pParent->p->pLeft = it->p->pLeft;
+            it.p->pParent->pLeft = it.p->pLeft;
          }
       }
       
       //CASE 3: Two Children
-      if(it->p->pRight != nullptr && it->p->pLeft != nullptr)
+      if(it.p->pRight != nullptr && it.p->pLeft != nullptr)
       {
          iterator ios = it;
          ++ios;
-         assert(ios->p->pLeft == nullptr); //ios should NOT have a left child
+         assert(ios.p->pLeft == nullptr); //ios should NOT have a left child
 
-         if(ios->p->pRight != nullptr)
+         if(ios.p->pRight != nullptr)
          {
-            it->p->pRight->pParent = ios->p; //change it->p to ios
-            ios->p->pRight->pParent = ios->pRight; //move ios's right child to ios's spot
-            delete it->p;
+            it.p->pRight->pParent = ios.p; //change it->p to ios
+            ios.p->pRight->pParent = ios.p->pRight; //move ios's right child to ios's spot
+            delete it.p;
          }
          else
          {
-            it->p->pRight->pParent = ios->p;
-            delete it->p;
+            it.p->pRight->pParent = ios.p;
+            delete it.p;
          }
       }
    }
