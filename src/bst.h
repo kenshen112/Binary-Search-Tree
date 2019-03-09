@@ -558,8 +558,8 @@ namespace custom
 * Searches the Binary Search Tree for an item.
 ************************************************/
 	  template <class T>
-	  typename BST<T>::iterator find(T itemToFind) {
-		  for (typename BST<T>::iterator it = itemToFind; it; it = it->p->pNext)
+	  typename BST<T>::iterator BST<T>::find(T itemToFind) {
+		  for (iterator it = itemToFind; it != nullptr; it = it->p->pNext)
 		  {
 			  if (it->p->data == itemToFind)
 			  {
