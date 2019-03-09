@@ -37,7 +37,7 @@ namespace custom
       }
       ~BST()
       {
-         deleteBinaryTree(root);
+         //deleteBinaryTree(root);
 		 numElements = 0;
       }
       BST(const BST <T> *rhs)
@@ -87,7 +87,10 @@ namespace custom
       void deleteNode(BNode <T> *nodeToDelete, bool isRight);
       void deleteBinaryTree(BNode <T> *deletor);
       void copyBinaryTree(BNode<T> *copySource, BNode <T> *copyDest);
-      
+	  void balence(BST<T>* tree);
+
+
+
    };
 
     template <class T>
@@ -135,6 +138,9 @@ namespace custom
    template <class T>
       typename BST<T>::iterator BST<T>::iterator::operator--()
    {
+		  BNode<T> *pNode = root;
+
+
       // do nothing if we have nothing
       if (pNode == nullptr) // rember always use nullptr instead of NULL
          return *this;
@@ -184,6 +190,9 @@ namespace custom
    template <class T>
    typename BST <T>::iterator BST<T>::iterator::operator++()
    {
+	   BNode<T> *pNode = root;
+
+
       // do nothing if we have nothing
       if (pNode == nullptr) // rember always use nullptr instead of NULL
          return *this;
@@ -236,13 +245,12 @@ namespace custom
 
    template<class T>
    void BST<T>::insert(T item)
-   {
-      
-      if (root == nullptr) // case 1 tree is black
-      {
-         root = new BNode<T>(item); // This node is black yo!
-         root->black = true;
-         root->parent = true;
+   {   
+	   if (root == nullptr) // case 1 tree is black
+	   {
+		   root = new BNode<T>(item); // This node is black yo!
+		   root->black = true;
+		   root->parent = true;
       }
       
       if (item > root->data)
@@ -253,34 +261,7 @@ namespace custom
       else if (item < root->data)
       {
          root->pLeft = new Node<T>(item);
-      }
-      
-      
-      
-      
-      
-      //   A Baisc structure of Red Black Balencing 	   
-      if (root->black == true && root->parent == true) //case 2 Might we be missing a circumstance here?
-	   {
-              root->pParent = new BNode<T>(item);
-              root->pParent->red = true;
-	   }
-      
-      
-      if (root->black && root->pParent->red && root->pRight->red) // Case 3 the recolor
-      {
-         root->black = false;
-         root->red = true;
-         root->pParent->red = false;
-         root->pParent->black = true;
-         root->pRight->red = false;
-         root->pRight->black = true;
-      }
-      
-      if (item)
-      {
-         
-      }
+      }               
    }
 
    template <class T>
@@ -288,7 +269,7 @@ namespace custom
    {
 
       //CASE 1: NO children
-      if (its->p->pRight == nullptr && it->p->pLeft == nullptr) // there aint no children up in here mmm hmmm das what i'm sayin.
+      if (it->p->pRight == nullptr && it->p->pLeft == nullptr) // there aint no children up in here mmm hmmm das what i'm sayin.
       {
          
          if (it->p->pParent != nullptr && it->p->pParent->pRight == it->p)
@@ -330,7 +311,7 @@ namespace custom
       {//we have a right child but not a left one
          it->p->pLeft->pParent = it->p->pParent;
          
-         if (it->p->pParent != nullptr && it->p->pParent->pRight == it->)
+         if (it->p->pParent != nullptr && it->p->pParent->pRight == it->p)
          {
             it->p->pParent->pRight = it->p->pLeft;
          }
@@ -347,18 +328,46 @@ namespace custom
       //then iterate one node past that and you've found the ios!
    }
 
+	  template<class T>
+	 void BST<T>::balence(BST<T>* tree)
+	  {
+	  
+		 if (tree->root == nullptr) // case 1 tree is black
+		 {
+			 tree->root->black = true;
+			 tree->root->parent = true;
+		 }
+
+		 //   A Baisc structure of Red Black Balencing 	   
+		 if (tree->black == true && tree->parent == true) //case 2 Might we be missing a circumstance here?
+		 {
+			 tree->root->pParent->red = true;
+		 }
+
+
+		 if (tree->root->black && root->pParent->red && root->pRight->red) // Case 3 the recolor
+		 {
+			 tree->root->black = false;
+			 tree->root->red = true;
+			 tree->root->pParent->red = false;
+			 tree->root->pParent->black = true;
+			 tree->root->pRight->red = false;
+			 tree->root->pRight->black = true;
+		 } 
+	 }
+
    
 /************************************************
 * Find:
 * Searches the Binary Search Tree for an item.
 ************************************************/
 	  template <class T>
-	  BST<T>::iterator find(T itemToFind) {
-		  for (iterator it = itemToFind; tempNode; tempNode = tempNode->pNext)
+	  typename BST<T>::iterator find(T itemToFind) {
+		  for (typename BST<T>::iterator it = itemToFind; it; it = it->p->pNext)
 		  {
-			  if (tempNode->data == itemToFind)
+			  if (it->p->data == itemToFind)
 			  {
-				  return tempNode;
+				  return it;
 			  }
 		  }
 
