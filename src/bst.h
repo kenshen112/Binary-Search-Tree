@@ -46,21 +46,29 @@ namespace custom
       }
       BST(const BST <T> *rhs)
        {
-          
-          BST <T> *destination = new BST<T> *;
-          
           if(rhs == nullptr)
           {
-             destination->root = nullptr;
+             return;
           }
           
-          numElements = rhs.numElements;
+          //clear();
+               
+          // push the head of the tree onto the queue
+          queue <BNode <T> *> q;
           
-          for(BST <T> :: iterator it = rhs.begin(); it != rhs.end(); ++it)
+          q.push(rhs.root);
+          // while there are still sub-trees to visit…
+          while (!q.empty())
           {
-             destination.insert(*it);
+             // add the left and right sub-tree to the queue
+             if (q.top()->pLeft != NULL)
+                q.push(q.top()->pLeft);
+             if (q.top()->pRight != NULL)
+                q.push(q.top()->pRight);
+             // visit the current node
+             insert(q.top()->data);
+             q.pop();
           }
-          
        }
 
       BST operator = (const BST <T> *rhs)
@@ -89,10 +97,6 @@ namespace custom
             insert(q.top()->data);
             q.pop();
          }
-
-         
-         
-         
          
          return *this;
            
