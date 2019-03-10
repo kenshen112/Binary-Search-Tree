@@ -61,9 +61,9 @@ namespace custom
           while (!q.empty())
           {
              // add the left and right sub-tree to the queue
-             if (q.top()->pLeft != NULL)
+             if (q.top()->pLeft != nullptr)
                 q.push(q.top()->pLeft);
-             if (q.top()->pRight != NULL)
+             if (q.top()->pRight != nullptr)
                 q.push(q.top()->pRight);
              // visit the current node
              insert(q.top()->data);
@@ -89,9 +89,9 @@ namespace custom
          while (!q.empty())
          {
             // add the left and right sub-tree to the queue
-            if (q.top()->pLeft != NULL)
+            if (q.top()->pLeft != nullptr)
                q.push(q.top()->pLeft);
-            if (q.top()->pRight != NULL)
+            if (q.top()->pRight != nullptr)
                q.push(q.top()->pRight);
             // visit the current node
             insert(q.top()->data);
