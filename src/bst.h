@@ -56,7 +56,7 @@ namespace custom
           // push the head of the tree onto the queue
           queue <BNode <T> *> q;
           
-          q.push(rhs.root);
+          q.push(rhs->root);
           // while there are still sub-trees to visit…
           while (!q.empty())
           {
@@ -71,10 +71,10 @@ namespace custom
           }
        }
 
-      BST operator = (const BST <T> *rhs)
+      BST operator = (const BST <T> &rhs)
       {
          
-         if(rhs->root == nullptr)
+         if(rhs.root == nullptr)
          {
             return nullptr;
          }
