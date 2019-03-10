@@ -11,7 +11,8 @@
 #include "queue.h"
 #ifndef BST_H
 #define BST_H
-
+using std::cout;
+using std::endl;
 namespace custom
 {
    
@@ -418,7 +419,7 @@ namespace custom
 template <class T>
    void BST <T> :: deleteBinaryTree(BNode <T> *deletor)
    {
-      
+
       if(deletor == nullptr)
       {
          return;
@@ -434,8 +435,8 @@ template <class T>
       {
          //std::cerr << "its null now\n";
       }
-      
-      
+
+
    }   
 
    
@@ -452,11 +453,13 @@ template <class T>
    template<class T>
       void BST<T>::insert(T item)
    {
+      cout << "we are in insert\n";
       BNode <T> * pNew;
       try
       {
          //make a new node
          pNew = new BNode <T> (item);
+                cout << "We just made a new node\n";
       }
       catch (std::bad_alloc)
       {
@@ -466,6 +469,7 @@ template <class T>
       //if the tree is currently empty
       if (root == nullptr) // case 1 tree is black
       {
+          cout << "the tree is empty\n";
          root = pNew; // This node is black yo!
          root->black = true;
          root->parent = true;
@@ -486,7 +490,7 @@ template <class T>
             {
                home = true;
                left = true;
-               //		   pPlace->pLeft = pNew;
+               //             		   pPlace->pLeft = pNew;
             }
             else
                pPlace = pPlace->pLeft;
@@ -497,7 +501,7 @@ template <class T>
             {
                home = true;
                left = false;
-               //	   pPlace->pRight = pNew;
+//               	   pPlace->pRight = pNew;
             }
             else
                pPlace = pPlace->pRight;
@@ -507,11 +511,13 @@ template <class T>
       
       if(left)
       {
+          cout << "it needs to go in the left\n";
          pPlace->pLeft = pNew;
          pNew->pParent = pPlace;
       }
       else
       {
+          cout << "it needs to go on the right\n";
          pPlace->pRight = pNew;
          pNew->pParent = pPlace;
       }
@@ -528,7 +534,9 @@ template <class T>
       {
          root->pLeft = new BNode<T>(item);
          numElements++;
-      }*/         
+      }*/
+
+      cout << "we made it through insert!\n";
    }
 
 /*********************************************

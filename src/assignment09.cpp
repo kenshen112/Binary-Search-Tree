@@ -249,24 +249,27 @@ void testIterate()
    //
    try
    {
+      cout << "non trivial tree test\n"; 
       BST <string> tree1;
+      cout << "created tree1\n";
       BST <string> tree2;
+      cout << "created tree2 \n";
 
       // fill the tree
       cout << "Fill the BST with: f  c  i  b  e  g  j  a  d  h  \n";
       tree1.insert(string("f"));     //               f
-//      cout << "Inserted the first\n";
+      cout << "Inserted the first\n";
       tree1.insert(string("c"));     //          +----+----+
-//      cout << "Inserted the second\n";
-      tree1.insert(string("i"));     //          c         i
-//cout << "Inserted the third\n"
-      tree1.insert(string("b"));     //       +--+--+   +--+--+
-      tree1.insert(string("e"));     //       b     e   g     j
-      tree1.insert(string("g"));     //     +-+   +-+   +-+
-      tree1.insert(string("j"));     //     a     d       h
-      tree1.insert(string("a"));     
-      tree1.insert(string("d"));
-      tree1.insert(string("h"));
+      cout << "Inserted the second\n";
+      // tree1.insert(string("i"));     //          c         i
+      cout << "Inserted the third\n";
+      //tree1.insert(string("b"));     //       +--+--+   +--+--+
+      // tree1.insert(string("e"));     //       b     e   g     j
+      // tree1.insert(string("g"));     //     +-+   +-+   +-+
+      // tree1.insert(string("j"));     //     a     d       h
+      // tree1.insert(string("a"));     
+      //    tree1.insert(string("d"));
+//      tree1.insert(string("h"));
 
       
       cout << "Finished inserting\n";
