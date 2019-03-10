@@ -71,7 +71,7 @@ namespace custom
           }
        }
 
-      BST & operator = (const BST <T> *rhs) throw (const char *)
+      BST operator= (const BST <T> & rhs) throw (const char *)
       {
          
          if(rhs.root == nullptr)
