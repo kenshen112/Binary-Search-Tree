@@ -193,7 +193,7 @@ void testIterate()
    //
    try
    {
-	   std::cerr << "this is test iterate" << std::endl;
+      std::cerr << "this is test iterate" << std::endl;
       BST <bool> tree;      
       cout << "Empty tree\n";
       cout << "\tSize:     " << tree.size() << endl;
@@ -212,23 +212,30 @@ void testIterate()
       cout << "A tree with three nodes\n";
       BST <double> tree1;
       BST <double> tree2;
-
+      
       // fill the tree
       cout << "\tFill the BST with: 2.2  1.1  3.3\n";
       tree1.insert(2.2);     //          2.2
       tree1.insert(1.1);     //     +-----+-----+    
       tree1.insert(3.3);     //    1.1         3.3
-      cout << "\tContents forward:  " << tree1 << endl;
-
+      cout << "\tContents forward:  " << tree1 << endl;      
+      
       // copy the tree and clear the first
       tree2 = tree1;
       tree1.clear();
+      char yes;
+      cout << "ready to continue? ";
+      cin >> yes;
+      
 
       // display the contents backwards
       cout << "\tContents backward: {";
       BST <double> :: iterator it;
       for (it = tree2.rbegin(); it != tree2.rend(); --it)
+      {
+         cout << "are we there yet???\n";
          cout << "  " << *it;
+      }
       cout << "  }\n";
    }
    catch (const char * s)

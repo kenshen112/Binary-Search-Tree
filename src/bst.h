@@ -8,6 +8,7 @@
  *    Create a binary search tree
  ************************************************************************/
 #include "bnode.h"
+#include "queue.h"
 #ifndef BST_H
 #define BST_H
 
@@ -70,13 +71,28 @@ namespace custom
             return nullptr;
          }
          
-         BST <T> * destination = new BST <T>(rhs->root);
-         numElements = rhs.numElements;
-         
-         for(BST <T> :: iterator it = rhs.begin(); it != rhs.end(); ++it)
+         //clear();
+
+         // push the head of the tree onto the queue
+         queue <BNode <T> *> q;
+
+         q.push(rhs.root);
+         // while there are still sub-trees to visit…
+         while (!q.empty())
          {
-            destination.insert(*it);
+            // add the left and right sub-tree to the queue
+            if (q.top()->pLeft != NULL)
+               q.push(q.top()->pLeft);
+            if (q.top()->pRight != NULL)
+               q.push(q.top()->pRight);
+            // visit the current node
+            insert(q.top()->data);
+            q.pop();
          }
+
+         
+         
+         
          
          return *this;
            
@@ -111,7 +127,6 @@ namespace custom
        iterator(BNode <T> *pNewit)
        {
           this->p = pNewit;
-
        }
 
        iterator(const iterator &rhs)
@@ -276,6 +291,7 @@ namespace custom
       {
          return iterator(nullptr);
       }
+      
       BNode <T> *pNew;
       pNew = root;
       
