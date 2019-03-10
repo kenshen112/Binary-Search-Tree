@@ -42,8 +42,8 @@ namespace custom
       }
       ~BST()
       {
-         deleteBinaryTree(root);
-         numElements = 0;
+         // deleteBinaryTree(root);
+         // numElements = 0;
       }
       BST(const BST <T> *rhs)
        {
@@ -52,7 +52,6 @@ namespace custom
              return;
           }
           
-          clear();
                
           // push the head of the tree onto the queue
           queue <BNode <T> *> q;
@@ -80,7 +79,6 @@ namespace custom
             return nullptr;
          }
          
-         clear();
 
          // push the head of the tree onto the queue
          queue <BNode <T> *> q;
@@ -430,7 +428,7 @@ template <class T>
 
       delete deletor;
 
-      deletor = nullptr;
+      deletor = new BNode <T>();
       if(deletor == NULL)
       {
          //std::cerr << "its null now\n";
@@ -453,13 +451,13 @@ template <class T>
    template<class T>
       void BST<T>::insert(T item)
    {
-      cout << "we are in insert\n";
+//      cout << "we are in insert\n";
       BNode <T> * pNew;
       try
       {
          //make a new node
          pNew = new BNode <T> (item);
-                cout << "We just made a new node\n";
+         //              cout << "We just made a new node\n";
       }
       catch (std::bad_alloc)
       {
@@ -469,7 +467,7 @@ template <class T>
       //if the tree is currently empty
       if (root == nullptr) // case 1 tree is black
       {
-          cout << "the tree is empty\n";
+         // cout << "the tree is empty\n";
          root = pNew; // This node is black yo!
          root->black = true;
          root->parent = true;
@@ -511,13 +509,13 @@ template <class T>
       
       if(left)
       {
-          cout << "it needs to go in the left\n";
+         //    cout << "it needs to go in the left\n";
          pPlace->pLeft = pNew;
          pNew->pParent = pPlace;
       }
       else
       {
-          cout << "it needs to go on the right\n";
+         // cout << "it needs to go on the right\n";
          pPlace->pRight = pNew;
          pNew->pParent = pPlace;
       }
@@ -536,7 +534,7 @@ template <class T>
          numElements++;
       }*/
 
-      cout << "we made it through insert!\n";
+      // cout << "we made it through insert!\n";
    }
 
 /*********************************************
@@ -662,7 +660,7 @@ template <class T>
             while(pNew->pLeft)
             {
                pNew = pNew->pLeft;
-			   std::cout << pNew->data << std::endl;
+
             }
             
             return iterator (pNew);
