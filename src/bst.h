@@ -428,7 +428,7 @@ template <class T>
 
       delete deletor;
 
-      deletor = new BNode <T>();
+      deletor = nullptr;
       if(deletor == NULL)
       {
          //std::cerr << "its null now\n";
@@ -443,6 +443,7 @@ template <class T>
    {
 	   deleteBinaryTree(root);
 	   numElements = 0;
+           root = nullptr;
    }
 
    /***************************************************
