@@ -51,7 +51,7 @@ namespace custom
              return;
           }
           
-          //clear();
+          clear();
                
           // push the head of the tree onto the queue
           queue <BNode <T> *> q;
@@ -71,7 +71,7 @@ namespace custom
           }
        }
 
-      BST operator = (const BST <T> &rhs)
+      BST & operator = (const BST <T> *rhs) throw (const char *)
       {
          
          if(rhs.root == nullptr)
@@ -79,7 +79,7 @@ namespace custom
             return nullptr;
          }
          
-         //clear();
+         clear();
 
          // push the head of the tree onto the queue
          queue <BNode <T> *> q;

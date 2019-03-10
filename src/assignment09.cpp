@@ -165,10 +165,10 @@ ostream & operator << (ostream & out, BST <T> & rhs)
 
 #ifdef TEST3
    typename BST <T> :: iterator it;
-   out << "we declared an iterator, we are about to declare the for loop\n";
+//   out << "we declared an iterator, we are about to declare the for loop\n";
    for (it = rhs.begin(); it != rhs.end(); it++)
    {
-      out << "we are in the for loop now\n";
+      //    out << "we are in the for loop now\n";
       out << "  " << *it;
    }
 #endif // TEST3
@@ -193,7 +193,7 @@ void testIterate()
    //
    try
    {
-      std::cerr << "this is test iterate" << std::endl;
+//      std::cerr << "this is test iterate" << std::endl;
       BST <bool> tree;      
       cout << "Empty tree\n";
       cout << "\tSize:     " << tree.size() << endl;
@@ -218,14 +218,15 @@ void testIterate()
       tree1.insert(2.2);     //          2.2
       tree1.insert(1.1);     //     +-----+-----+    
       tree1.insert(3.3);     //    1.1         3.3
+
+      //    cout << "Size of tree1: " << tree1.size() <<endl;
       cout << "\tContents forward:  " << tree1 << endl;      
-      
       // copy the tree and clear the first
       tree2 = tree1;
       tree1.clear();
-      char yes;
-      cout << "ready to continue? ";
-      cin >> yes;
+//      char yes;
+      //    cout << "ready to continue? ";
+      // cin >> yes;
       
 
       // display the contents backwards
@@ -233,7 +234,7 @@ void testIterate()
       BST <double> :: iterator it;
       for (it = tree2.rbegin(); it != tree2.rend(); --it)
       {
-         cout << "are we there yet???\n";
+//         cout << "are we there yet???\n";
          cout << "  " << *it;
       }
       cout << "  }\n";
@@ -254,8 +255,11 @@ void testIterate()
       // fill the tree
       cout << "Fill the BST with: f  c  i  b  e  g  j  a  d  h  \n";
       tree1.insert(string("f"));     //               f
+//      cout << "Inserted the first\n";
       tree1.insert(string("c"));     //          +----+----+
+//      cout << "Inserted the second\n";
       tree1.insert(string("i"));     //          c         i
+//cout << "Inserted the third\n"
       tree1.insert(string("b"));     //       +--+--+   +--+--+
       tree1.insert(string("e"));     //       b     e   g     j
       tree1.insert(string("g"));     //     +-+   +-+   +-+
@@ -263,6 +267,9 @@ void testIterate()
       tree1.insert(string("a"));     
       tree1.insert(string("d"));
       tree1.insert(string("h"));
+
+      
+      cout << "Finished inserting\n";
       cout << "\tSize:     " << tree1.size() << endl;
       cout << "\tContents: " << tree1        << endl;
 
