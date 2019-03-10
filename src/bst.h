@@ -13,6 +13,7 @@
 #define BST_H
 using std::cout;
 using std::endl;
+using std::cin;
 namespace custom
 {
    
@@ -611,19 +612,42 @@ template <class T>
 
 	std::cerr << "Case 3" << std::endl;
 	iterator ios = it;
-         ++ios;
-         assert(ios.p->pLeft == nullptr); //ios should NOT have a left child
+        char response;
+        cout << "continue?";
+        cin >> response;
+           
+        std::cerr << "incrementing iterator\n";
+        ios++;
+
+        cout << "continue?";
+        cin >> response;
+        
+        assert(ios.p->pLeft == nullptr); //ios should NOT have a left child
 
          if(ios.p->pRight != nullptr)
          {
+            std::cerr << "ios has a right child\n";
+
+            if(it.p->pParent->pRight != nullptr)
+  
             it.p->pRight->pParent = ios.p; //change it->p to ios
             ios.p->pRight->pParent = ios.p->pRight; //move ios's right child to ios's spot
+
+            cout << "continue?";
+            cin >> response;
+            
+            it.p = nullptr;
             delete it.p;
          }
          else
          {
+            cout << "continue?";
+            cin >> response;
+            
             it.p->pRight->pParent = ios.p;
-            delete it.p;
+            it.p = nullptr;
+
+ 
          }
       }
    }
