@@ -549,6 +549,8 @@ template <class T>
       //CASE 1: NO children
       if (it.p->pRight == nullptr && it.p->pLeft == nullptr) // there aint no children up in here mmm hmmm das what i'm sayin.
       {
+
+	std::cerr << "Case 1" << std::endl;
          
          if (it.p->pParent != nullptr && it.p->pParent->pRight == it.p)
          {//we are on the right of a parent
@@ -572,6 +574,9 @@ template <class T>
       //CASE 2: One Child
       if (it.p->pRight != nullptr && it.p->pLeft == nullptr)
       {//we have a left child, but no right children
+
+	std::cerr << "Case 2" << std::endl;
+	
          it.p->pRight->pParent = it.p->pParent;
          
          if (it.p->pParent != nullptr && it.p->pParent->pRight == it.p)
@@ -603,7 +608,9 @@ template <class T>
       //CASE 3: Two Children
       if(it.p->pRight != nullptr && it.p->pLeft != nullptr)
       {
-         iterator ios = it;
+
+	std::cerr << "Case 3" << std::endl;
+	iterator ios = it;
          ++ios;
          assert(ios.p->pLeft == nullptr); //ios should NOT have a left child
 
@@ -624,7 +631,6 @@ template <class T>
 	  template<class T>
 	 void BST<T>::balence(BST<T>* tree)
 	  {
-	  
 		 if (tree->root == nullptr) // case 1 tree is black
 		 {
 			 tree->root->black = true;
