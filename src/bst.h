@@ -61,12 +61,12 @@ namespace custom
           while (!q.empty())
           {
              // add the left and right sub-tree to the queue
-             if (q.top()->pLeft != nullptr)
-                q.push(q.top()->pLeft);
-             if (q.top()->pRight != nullptr)
-                q.push(q.top()->pRight);
+             if (q.front()->pLeft != nullptr)
+                q.push(q.front()->pLeft);
+             if (q.front()->pRight != nullptr)
+                q.push(q.front()->pRight);
              // visit the current node
-             insert(q.top()->data);
+             insert(q.front()->data);
              q.pop();
           }
        }
@@ -74,7 +74,7 @@ namespace custom
       BST operator = (const BST <T> *rhs)
       {
          
-         if(rhs == nullptr)
+         if(rhs->root == nullptr)
          {
             return nullptr;
          }
@@ -89,12 +89,12 @@ namespace custom
          while (!q.empty())
          {
             // add the left and right sub-tree to the queue
-            if (q.top()->pLeft != nullptr)
-               q.push(q.top()->pLeft);
-            if (q.top()->pRight != nullptr)
-               q.push(q.top()->pRight);
+            if (q.front()->pLeft != nullptr)
+               q.push(q.front()->pLeft);
+            if (q.front()->pRight != nullptr)
+               q.push(q.front()->pRight);
             // visit the current node
-            insert(q.top()->data);
+            insert(q.front()->data);
             q.pop();
          }
          
@@ -486,7 +486,7 @@ template <class T>
             {
                home = true;
                left = true;
-			   pPlace->pLeft = pNew;
+               //		   pPlace->pLeft = pNew;
             }
             else
                pPlace = pPlace->pLeft;
@@ -497,7 +497,7 @@ template <class T>
             {
                home = true;
                left = false;
-			   pPlace->pRight = pNew;
+               //	   pPlace->pRight = pNew;
             }
             else
                pPlace = pPlace->pRight;
