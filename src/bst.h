@@ -550,29 +550,29 @@ template <class T>
       if (it.p->pRight == nullptr && it.p->pLeft == nullptr) // there aint no children up in here mmm hmmm das what i'm sayin.
       {
 
-	std::cerr << "Case 1" << std::endl;
+         std::cerr << "Case 1" << std::endl;
          
          if (it.p->pParent != nullptr && it.p->pParent->pRight == it.p)
          {//we are on the right of a parent
             it.p->pParent->pRight = nullptr;
-            delete it.p;
             it.p = nullptr;
+            delete it.p;
          }
          else if (it.p->pParent != nullptr && it.p->pParent->pLeft == it.p)
          {//we are on the left of a parent
             it.p->pParent->pLeft = nullptr;
-            delete it.p;
             it.p = nullptr;
-         }
+            delete it.p;
+         } 
          else if (it.p->pParent == nullptr)
          {//there is no parent
-            delete it.p;
             it.p = nullptr;
+            delete it.p;
          }
       }
 
       //CASE 2: One Child
-      if (it.p->pRight != nullptr && it.p->pLeft == nullptr)
+      else if (it.p->pRight != nullptr && it.p->pLeft == nullptr)
       {//we have a left child, but no right children
 
 	std::cerr << "Case 2" << std::endl;
@@ -590,7 +590,7 @@ template <class T>
          }
       }
       
-      if (it.p->pRight == nullptr && it.p->pLeft != nullptr)
+      else if (it.p->pRight == nullptr && it.p->pLeft != nullptr)
       {//we have a right child but not a left one
          it.p->pLeft->pParent = it.p->pParent;
          
@@ -606,7 +606,7 @@ template <class T>
       }
       
       //CASE 3: Two Children
-      if(it.p->pRight != nullptr && it.p->pLeft != nullptr)
+      else if(it.p->pRight != nullptr && it.p->pLeft != nullptr)
       {
 
 	std::cerr << "Case 3" << std::endl;
