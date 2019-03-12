@@ -1,13 +1,23 @@
 ###############################################################
 # Program:
 #     Assignment 09, Binary Search Tree
-#     Brother XXXXX, CS235
+#     Brother Kirby, CS235
 # Author:
-#     <your name here>
+#     Ken Smith
+#     Tim O'Barr
+#     Jessica Smith
 # Summary:
-#     <put a description here>
+#     An impementation of a Binary Search Tree
 # Time:
-#     <how long did it take to complete this program?>
+#     Team: 8hours
+#     Solo:
+#        Ken: 10
+#        Tim: 10
+#        Jessica: 10.5
+#     harder parts:
+#        Ken: All the fixes(insert, find, erase, assignment operator), strange errors, and seg faults.
+#        Jessica: assignment operator without recursion. and seg faults
+#        Tim: the insert function
 ###############################################################
 
 ##############################################################

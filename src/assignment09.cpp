@@ -373,7 +373,10 @@ void testDelete()
       else
          cout << "\tNode '" << *it << "' found\n";
       if (it != tree.end())
+      {
+         cout << "going to erase, now\n";
          tree.erase(it);
+      }
 
       // display the tree
       cout << "\tContents: "

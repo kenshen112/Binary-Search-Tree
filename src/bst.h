@@ -574,155 +574,223 @@ template <class T>
 
       //CASE 2: One Child
       else if (it.p->pRight != nullptr && it.p->pLeft == nullptr)
-      {//we have a left child, but no right children
+      {//we have a right child, but no left children
 
 	std::cerr << "Case 2" << std::endl;
 	
          it.p->pRight->pParent = it.p->pParent;
          
-         if (it.p->pParent != nullptr && it.p->pParent->pRight == it.p)
+         if (it.p->pParent != nullptr && it.p->pParent->pRight == it.p) //we are the right child
          {
             it.p->pParent->pRight = it.p->pRight;
          }
          
-         if (it.p->pParent != nullptr && it.p->pParent->pLeft == it.p)
+         if (it.p->pParent != nullptr && it.p->pParent->pLeft == it.p) //we are the left child
          {
             it.p->pParent->pLeft = it.p->pRight;
          }
+         it.p = nullptr;
+         delete it.p;
       }
       
       else if (it.p->pRight == nullptr && it.p->pLeft != nullptr)
-      {//we have a right child but not a left one
+      {//we have a left child but not a right one
          it.p->pLeft->pParent = it.p->pParent;
          
-         if (it.p->pParent != nullptr && it.p->pParent->pRight == it.p)
+         if (it.p->pParent != nullptr && it.p->pParent->pRight == it.p) //we are the right child
          {
             it.p->pParent->pRight = it.p->pLeft;
          }
          
-         if (it.p->pParent != nullptr && it.p->pParent->pLeft == it.p)
+         if (it.p->pParent != nullptr && it.p->pParent->pLeft == it.p) // we are the right child
          {
             it.p->pParent->pLeft = it.p->pLeft;
          }
+         it.p = nullptr;
+         delete it.p;
       }
       
       //CASE 3: Two Children
       else if(it.p->pRight != nullptr && it.p->pLeft != nullptr)
-      {
-
-	std::cerr << "Case 3" << std::endl;
-	iterator ios = it;
-        char response;
-        cout << "continue?";
-        cin >> response;
-           
-        std::cerr << "incrementing iterator\n";
-        ios++;
-
-        cout << "continue?";
-        cin >> response;
-        
-        assert(ios.p->pLeft == nullptr); //ios should NOT have a left child
-
-         if(ios.p->pRight != nullptr)
+      {//with this one, we need to properly map the logic.
+         // stipulations
+         // we have two children.
+         // one of them, (either the right child, or one of its descendants), is the guarateed successor.
+         // with that in mind...
+         // what variables are there???
+         // we have a parent or we don't.
+         // we are on the left or right of that parent. (i think this has been forgotten here)
+         // the successor is the imediate child, or it is one of its descendants
+         // 
+         
+         std::cerr << "Case 3" << std::endl;
+         iterator ios = it;
+         std::cerr << "making a new iterator and setting it to our current one\n";
+         
+         std::cerr << "incrementing iterator\n";
+         ios++;
+         
+         std::cerr << "asserting that ios does not have a left child\n";
+         assert(ios.p->pLeft == nullptr); //ios should NOT have a left child
+         
+         //IF it has a parent it needs to point to ios
+         if(it.p->pParent)
          {
-            std::cerr << "ios has a right child\n";
-
-            if(it.p->pParent->pRight != nullptr)
-  
-            it.p->pRight->pParent = ios.p; //change it->p to ios
-            ios.p->pRight->pParent = ios.p->pRight; //move ios's right child to ios's spot
-
-            cout << "continue?";
-            cin >> response;
+            std::cerr << "first we take care of the bottom of the tree, and then the top\n";
+            if(ios.p == it.p->pRight) //if our successor is the imediate right child
+            {  //we need to link it to the left child.
+               it.p->pLeft->pParent = ios.p;
+               ios.p->pLeft = it.p->pLeft;
+            }
+            else //the successor is one of the right childs descendants.
+            {
+               if(ios.p->pRight) //we need to link any potential descendants, so we don't loose them
+               {
+                  ios.p->pParent->pLeft = ios.p->pRight;
+                  ios.p->pRight->pParent = ios.p->pParent;
+               }
+               else //there are no descendants to worry about
+               {
+                  ios.p->pParent->pLeft = nullptr;
+               }
+               //and then link to it's left child anyway
+               it.p->pLeft->pParent = ios.p;
+               ios.p->pLeft = it.p->pLeft;
+               ios.p->pRight = it.p->pRight;
+            }
+            std::cerr << "now we take care of the top by \n";
+            std::cerr << "making it.p's parent node point to ios instead, and making ios point to it's parent\n";
+            if(it.p->pParent->pLeft == it.p)
+            {
+               it.p->pParent->pLeft = ios.p;
+               ios.p->pParent = it.p->pParent;
+            }
+            else
+            {
+               it.p->pParent->pRight = ios.p;
+               ios.p->pParent = it.p->pParent;
+            }
             
-            it.p = nullptr;
-            delete it.p;
+            
          }
-         else
+         else //we don't have a parent
          {
-            cout << "continue?";
-            cin >> response;
-            
+            std::cerr << "there is no parent to what we are deleting, so\n";
+            std::cerr << "first we take care of the bottom of the tree\n";
+            if(ios.p == it.p->pRight) //if our successor is the imediate right child
+            {  //we need to link it to the left child.
+               it.p->pLeft->pParent = ios.p;
+               ios.p->pLeft = it.p->pLeft;
+            }
+            else //the successor is one of the right childs descendants.
+            {
+               if(ios.p->pRight) //we need to link any potential descendants, so we don't loose them
+               {
+                  ios.p->pParent->pLeft = ios.p->pRight;
+                  ios.p->pRight->pParent = ios.p->pParent;
+               }
+               //and then link to it's left child anyway
+               it.p->pLeft->pParent = ios.p;
+               ios.p->pLeft = it.p->pLeft;
+            }        
+         }
+         /*
+         //if it has children, they need to point to ios.
+         if(it.p->pLeft)
+            it.p->pLeft->pParent = ios.p;
+         if(it.p->pRight)
             it.p->pRight->pParent = ios.p;
-            it.p = nullptr;
-
- 
+         std::cerr << "the children of it now point to it's parent instead of it\n";
+         
+         //if, ios has a right child, that child takes ios's spot.
+         if(ios.p->pRight)
+         {
+            ios.p->pParent->pLeft = ios.p->pRight;
+            ios.p->pRight->pParent = ios.p->pParent;
+            std::cerr << "i think there is something wrong with these statements, review later\n";
          }
+         
+         //ios need to point to it's parent.
+         ios.p->pParent = it.p->pParent;
+         */
+         
+         it.p = nullptr;
+         delete it.p;
       }
+      
    }
-
-	  template<class T>
-	 void BST<T>::balence(BST<T>* tree)
-	  {
-		 if (tree->root == nullptr) // case 1 tree is black
-		 {
-			 tree->root->black = true;
-			 tree->root->parent = true;
-		 }
-
-		 //   A Baisc structure of Red Black Balencing 	   
-		 if (tree->black == true && tree->parent == true) //case 2 Might we be missing a circumstance here?
-		 {
-			 tree->root->pParent->red = true;
-		 }
-
-
-		 if (tree->root->black && root->pParent->red && root->pRight->red) // Case 3 the recolor
-		 {
-			 tree->root->black = false;
-			 tree->root->red = true;
-			 tree->root->pParent->red = false;
-			 tree->root->pParent->black = true;
-			 tree->root->pRight->red = false;
-			 tree->root->pRight->black = true;
-		 } 
-	 }
-
-	template<class T>
-	typename BST<T>::iterator BST<T>::begin()
-	 {
-            if(root == nullptr)
-            {
-               return iterator(nullptr);
-            }
-            BNode <T> *pNew = root;
-
-            while(pNew->pLeft)
-            {
-               pNew = pNew->pLeft;
-
-            }
-            
-            return iterator (pNew);
-         }
-
-	template<class T>
-	typename BST<T>::iterator BST<T>::end()
-	{
-		return iterator(nullptr);
-	}
-
+   
+   
+   template<class T>
+      void BST<T>::balence(BST<T>* tree)
+   {
+      if (tree->root == nullptr) // case 1 tree is black
+      {
+         tree->root->black = true;
+         tree->root->parent = true;
+      }
+      
+      //   A Baisc structure of Red Black Balencing 	   
+      if (tree->black == true && tree->parent == true) //case 2 Might we be missing a circumstance here?
+      {
+         tree->root->pParent->red = true;
+      }
+      
+      
+      if (tree->root->black && root->pParent->red && root->pRight->red) // Case 3 the recolor
+      {
+         tree->root->black = false;
+         tree->root->red = true;
+         tree->root->pParent->red = false;
+         tree->root->pParent->black = true;
+         tree->root->pRight->red = false;
+         tree->root->pRight->black = true;
+      } 
+   }
+   
+   template<class T>
+      typename BST<T>::iterator BST<T>::begin()
+   {
+      if(root == nullptr)
+      {
+         return iterator(nullptr);
+      }
+      BNode <T> *pNew = root;
+      
+      while(pNew->pLeft)
+      {
+         pNew = pNew->pLeft;
+         
+      }
+      
+      return iterator (pNew);
+   }
+   
+   template<class T>
+      typename BST<T>::iterator BST<T>::end()
+   {
+      return iterator(nullptr);
+   }
+   
    
 /************************************************
 * Find:
 * Searches the Binary Search Tree for an item.
 v************************************************/
-        template <class T>
-           typename BST<T>::iterator BST<T>::find(T itemToFind)
-        {
-           for (iterator it = begin(); it != nullptr; it++)
-           {
-              if (*it == itemToFind)
-              {
-                 return it;
-              }
-           }
-           
-           return nullptr;
-        }
-        
-
+   template <class T>
+      typename BST<T>::iterator BST<T>::find(T itemToFind)
+   {
+      for (iterator it = begin(); it != nullptr; it++)
+      {
+         if (*it == itemToFind)
+         {
+            return it;
+         }
+      }
+      
+      return nullptr;
+   }
+   
 } // namespace custom
 
 #endif // BST_H
