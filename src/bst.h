@@ -551,7 +551,7 @@ template <class T>
       if (it.p->pRight == nullptr && it.p->pLeft == nullptr) // there aint no children up in here mmm hmmm das what i'm sayin.
       {
 
-         std::cerr << "Case 1" << std::endl;
+         //        std::cerr << "Case 1" << std::endl;
          
          if (it.p->pParent != nullptr && it.p->pParent->pRight == it.p)
          {//we are on the right of a parent
@@ -576,7 +576,7 @@ template <class T>
       else if (it.p->pRight != nullptr && it.p->pLeft == nullptr)
       {//we have a right child, but no left children
 
-	std::cerr << "Case 2" << std::endl;
+//	std::cerr << "Case 2" << std::endl;
 	
          it.p->pRight->pParent = it.p->pParent;
          
@@ -623,95 +623,99 @@ template <class T>
          // the successor is the imediate child, or it is one of its descendants
          // 
 
-         char response;
+/*         char response;
          std::cout << "continue into case 3?\n";
          std::cin >> response;
-
+*/
          
-         std::cerr << "Case 3" << std::endl;
+         //       std::cerr << "Case 3" << std::endl;
 
          iterator ios = it;
 
-         std::cerr << "making a new iterator and setting it to our current one\n";
+         // std::cerr << "making a new iterator and setting it to our current one\n";
 
-                 
+         /*      
          std::cout << "iterate the new iterator?\n";
          std::cin >> response;
          
          std::cerr << "incrementing iterator\n";
-         ios++;
+         */ios++;
          
-         std::cerr << "asserting that ios does not have a left child\n";
+         //std::cerr << "asserting that ios does not have a left child\n";
          assert(ios.p->pLeft == nullptr); //ios should NOT have a left child
 
-         std::cout << "delete the node?\n";
+         /*std::cout << "delete the node?\n";
          std::cin >> response;
-         
+         */
          //IF it has a parent it needs to point to ios
          if(it.p->pParent)
          {
-            std::cerr << "first we take care of the bottom of the tree, and then the top\n";
-
+            // std::cerr << "first we take care of the bottom of the tree, and then the top\n";
+            
             if(ios.p == it.p->pRight) //if our successor is the imediate right child
             {  //we need to link it to the left child.
-              std::cerr << "immediate right child, link it with the left\n";
-
-               std::cout << "1st if statement: our ios is the right child\n";
-               std::cin >> response;
+               // std::cerr << "immediate right child, link it with the left\n";
                
-              it.p->pLeft->pParent = ios.p;
-              ios.p->pLeft = it.p->pLeft; //what does this do?
+               //std::cout << "1st if statement: our ios is the right child\n";
+               // std::cin >> response;
+               
+               it.p->pLeft->pParent = ios.p;
+               ios.p->pLeft = it.p->pLeft; //what does this do?
             }
             else //the successor is one of the right childs descendants.
             {
                if(ios.p->pRight) //we need to link any potential descendants, so we don't loose them
                {
-
-                  std::cerr << "linking all kids from the successor\n";
-
-                  std::cout << "the ios is it.p's right side grandchild\n";
-                  std::cin >> response;
+                  
+                  // std::cerr << "linking all kids from the successor\n";
+                  
+                  //std::cout << "the ios is it.p's right side grandchild\n";
+                  //std::cin >> response;
                   
                   ios.p->pParent->pLeft = ios.p->pRight;
                   ios.p->pRight->pParent = ios.p->pParent; //Ithink thisline works but there's a chance it wouldn't...
                }
                else //there are no descendants to worry about
                {
-
-                  std::cerr << "successor is a leaf, the the parents left pointer is now null\n";
+                  //std::cerr << "successor is a leaf, the the parents left pointer is now null\n";
                   ios.p->pParent->pLeft = nullptr;
+                  //std::cout << "the ios had no children, but now will be linked to it's children\n";
+                  //std::cin >> response;
+               }
                
                //and then link to it's left child anyway
-               std::cerr << "linking with left child\n";
+               //std::cerr << "linking with it's left child\n";
                it.p->pLeft->pParent = ios.p;
                ios.p->pLeft = it.p->pLeft; //is that how pointers work?
-
-               std::cout << "the ios has no children\n";
-                  std::cin >> response;
-                  
-                  // ios.p->pParent->pLeft = nullptr;
-               }
+               
+               //std::cerr << "linking with it's right child\n";
+               it.p->pRight->pParent = ios.p;
+               ios.p->pRight = it.p->pRight; //is that how pointers work?
+               
+               
+               
             }
-/*               //and then link to it's left child anyway
-               std::cout << "linking to left child anyway\n";
-               std::cin >> response;
+            
+/*                          //and then link to it's left child anyway
+                            std::cout << "linking to left child anyway\n";
+                            std:    :cin >> response;
                
                it.p->pLeft->pParent = ios.p; //you're making ios.p take the place of it.p here
                ios.p->pLeft = it.p->pLeft; 
 
                ios.p->pRight = it.p->pRight;
 */       
-            std::cerr << "now we take care of the top by \n";
-            std::cerr << "making it.p's parent node point to ios instead, and making ios point to it's parent\n";
+            //std::cerr << "now we take care of the top by \n";
+            //std::cerr << "making it.p's parent node point to ios instead, and making ios point to it's parent\n";
             if(it.p->pParent->pLeft == it.p)
             {
-
-               std::cerr << "the one being deleted is a left child\n, connect successor with new parent and vice-versa\n";
-
-               std::cout << "making ios point to it, left side?\n";
-               std::cin >> response;
-
-               //we need to link it.p's children to ios.p
+               
+               // std::cerr << "the one being deleted is a left child\n, connect successor with new parent and vice-versa\n";
+               
+               //std::cout << "making ios point to it, left side?\n";
+               //std::cin >> response;
+               
+               //w e need to link it.p's children to ios.p
                if(it.p->pLeft)
                {
                   ios.p->pLeft = it.p->pLeft;
@@ -731,14 +735,14 @@ template <class T>
             }
             else
             {
-
-               std::cerr << "the one being deleted is a right child\n connect succesot with new parent...\n";
-
-               std::cout << "making ios point to it, right side?\n";
-               std::cin >> response;
                
-              //we need to link it.p's children to ios.p
-               if(it.p->pLeft)
+               //std::cerr << "the one being deleted is a right child\n connect succesor with new parent...\n";
+               
+//               std::cout << "making ios point to it, right side?\n";
+               //             std::cin >> response;
+               
+               //we need to link it.p's children to ios.p
+               /*if(it.p->pLeft) //i think something is wrong here
                {
                   ios.p->pLeft = it.p->pLeft;
                }
@@ -750,7 +754,7 @@ template <class T>
                {
                   ios.p->pLeft = nullptr;
                   ios.p->pRight = nullptr;
-               }
+                  }*/
                
                it.p->pParent->pRight = ios.p;
                ios.p->pParent = it.p->pParent;
@@ -760,8 +764,8 @@ template <class T>
          }
          else //we don't have a parent
          {
-            std::cerr << "there is no parent to what we are deleting, so\n";
-            std::cerr << "first we take care of the bottom of the tree\n";
+//            std::cerr << "there is no parent to what we are deleting, so\n";
+            //          std::cerr << "first we take care of the bottom of the tree\n";
             if(ios.p == it.p->pRight) //if our successor is the imediate right child
             {  //we need to link it to the left child.
                it.p->pLeft->pParent = ios.p;

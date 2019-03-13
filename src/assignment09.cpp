@@ -166,14 +166,13 @@ ostream & operator << (ostream & out, BST <T> & rhs)
 #ifdef TEST3
    typename BST <T> :: iterator it;
 //   out << "we declared an iterator, we are about to declare the for loop\n";
-   char x;
-   for (it = rhs.begin(); it != rhs.end(); it++)
+   int x = 0;
+   for (it = rhs.begin(); it != rhs.end() && x < 20; it++)
    {
       
       //    out << "we are in the for loop now\n";
-      out << "  " << *it << endl;
-      out << "ready for the next?";
-      cin >> x;
+      out << "  " << *it;
+      x++;
    }
 #endif // TEST3
    
@@ -378,7 +377,7 @@ void testDelete()
          cout << "\tNode '" << *it << "' found\n";
       if (it != tree.end())
       {
-         cout << "going to erase, now\n";
+         //cout << "going to erase, now\n";
          tree.erase(it);
       }
 
