@@ -629,12 +629,9 @@ template <class T>
 
          
          std::cerr << "Case 3" << std::endl;
-
          iterator ios = it;
-
          std::cerr << "making a new iterator and setting it to our current one\n";
 
-                 
          std::cout << "iterate the new iterator?\n";
          std::cin >> response;
          
@@ -651,107 +648,81 @@ template <class T>
          if(it.p->pParent)
          {
             std::cerr << "first we take care of the bottom of the tree, and then the top\n";
-
             if(ios.p == it.p->pRight) //if our successor is the imediate right child
             {  //we need to link it to the left child.
-              std::cerr << "immediate right child, link it with the left\n";
+<<<<<<< Updated upstream
+               std::cerr << "immediate right child, link it with the left\n";
+=======
 
                std::cout << "1st if statement: our ios is the right child\n";
                std::cin >> response;
                
-              it.p->pLeft->pParent = ios.p;
-              ios.p->pLeft = it.p->pLeft; //what does this do?
+>>>>>>> Stashed changes
+               it.p->pLeft->pParent = ios.p;
+               ios.p->pLeft = it.p->pLeft;
             }
             else //the successor is one of the right childs descendants.
             {
                if(ios.p->pRight) //we need to link any potential descendants, so we don't loose them
                {
-
+<<<<<<< Updated upstream
                   std::cerr << "linking all kids from the successor\n";
-
+=======
                   std::cout << "the ios is it.p's right side grandchild\n";
                   std::cin >> response;
                   
+>>>>>>> Stashed changes
                   ios.p->pParent->pLeft = ios.p->pRight;
-                  ios.p->pRight->pParent = ios.p->pParent; //Ithink thisline works but there's a chance it wouldn't...
+                  ios.p->pRight->pParent = ios.p->pParent;
                }
                else //there are no descendants to worry about
                {
-
+<<<<<<< Updated upstream
                   std::cerr << "successor is a leaf, the the parents left pointer is now null\n";
                   ios.p->pParent->pLeft = nullptr;
-               
+               }
                //and then link to it's left child anyway
                std::cerr << "linking with left child\n";
                it.p->pLeft->pParent = ios.p;
-               ios.p->pLeft = it.p->pLeft; //is that how pointers work?
-
-               std::cout << "the ios has no children\n";
+               ios.p->pLeft = it.p->pLeft;
+=======
+                  std::cout << "the ios has no children\n";
                   std::cin >> response;
                   
-                  // ios.p->pParent->pLeft = nullptr;
+                  ios.p->pParent->pLeft = nullptr;
                }
-            }
-/*               //and then link to it's left child anyway
+               //and then link to it's left child anyway
                std::cout << "linking to left child anyway\n";
                std::cin >> response;
                
                it.p->pLeft->pParent = ios.p; //you're making ios.p take the place of it.p here
                ios.p->pLeft = it.p->pLeft; 
-
+>>>>>>> Stashed changes
                ios.p->pRight = it.p->pRight;
-*/       
+            }
             std::cerr << "now we take care of the top by \n";
             std::cerr << "making it.p's parent node point to ios instead, and making ios point to it's parent\n";
             if(it.p->pParent->pLeft == it.p)
             {
-
+<<<<<<< Updated upstream
                std::cerr << "the one being deleted is a left child\n, connect successor with new parent and vice-versa\n";
-
+=======
                std::cout << "making ios point to it, left side?\n";
                std::cin >> response;
-
-               //we need to link it.p's children to ios.p
-               if(it.p->pLeft)
-               {
-                  ios.p->pLeft = it.p->pLeft;
-               }
-               else if(it.p->pRight)
-               {
-                  ios.p->pRight = it.p->pRight;
-               }
-               else
-               {
-                  ios.p->pLeft = nullptr;
-                  ios.p->pRight = nullptr;
-               }
                
+>>>>>>> Stashed changes
                it.p->pParent->pLeft = ios.p;
                ios.p->pParent = it.p->pParent;
             }
             else
             {
-
+<<<<<<< Updated upstream
                std::cerr << "the one being deleted is a right child\n connect succesot with new parent...\n";
-
+=======
                std::cout << "making ios point to it, right side?\n";
                std::cin >> response;
                
-              //we need to link it.p's children to ios.p
-               if(it.p->pLeft)
-               {
-                  ios.p->pLeft = it.p->pLeft;
-               }
-               else if(it.p->pRight)
-               {
-                  ios.p->pRight = it.p->pRight;
-               }
-               else
-               {
-                  ios.p->pLeft = nullptr;
-                  ios.p->pRight = nullptr;
-               }
-               
+>>>>>>> Stashed changes
                it.p->pParent->pRight = ios.p;
                ios.p->pParent = it.p->pParent;
             }
