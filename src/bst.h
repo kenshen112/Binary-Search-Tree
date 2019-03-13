@@ -639,6 +639,7 @@ template <class T>
             std::cerr << "first we take care of the bottom of the tree, and then the top\n";
             if(ios.p == it.p->pRight) //if our successor is the imediate right child
             {  //we need to link it to the left child.
+               std::cerr << "immediate right child, link it with the left\n";
                it.p->pLeft->pParent = ios.p;
                ios.p->pLeft = it.p->pLeft;
             }
@@ -646,14 +647,17 @@ template <class T>
             {
                if(ios.p->pRight) //we need to link any potential descendants, so we don't loose them
                {
+                  std::cerr << "linking all kids from the successor\n";
                   ios.p->pParent->pLeft = ios.p->pRight;
                   ios.p->pRight->pParent = ios.p->pParent;
                }
                else //there are no descendants to worry about
                {
+                  std::cerr << "successor is a leaf, the the parents left pointer is now null\n";
                   ios.p->pParent->pLeft = nullptr;
                }
                //and then link to it's left child anyway
+               std::cerr << "linking with left child\n";
                it.p->pLeft->pParent = ios.p;
                ios.p->pLeft = it.p->pLeft;
                ios.p->pRight = it.p->pRight;
@@ -662,11 +666,13 @@ template <class T>
             std::cerr << "making it.p's parent node point to ios instead, and making ios point to it's parent\n";
             if(it.p->pParent->pLeft == it.p)
             {
+               std::cerr << "the one being deleted is a left child\n, connect successor with new parent and vice-versa\n";
                it.p->pParent->pLeft = ios.p;
                ios.p->pParent = it.p->pParent;
             }
             else
             {
+               std::cerr << "the one being deleted is a right child\n connect succesot with new parent...\n";
                it.p->pParent->pRight = ios.p;
                ios.p->pParent = it.p->pParent;
             }
